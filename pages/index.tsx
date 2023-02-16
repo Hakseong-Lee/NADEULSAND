@@ -5,7 +5,7 @@ export default function intro() {
   return (
     <>
       <div className="intro-container">
-        <div className="page"></div>
+        <div className="page" />
         <div className="intro up-side-1"></div>
         <div className="intro up-side-2"></div>
         <div className="intro down-side-1"></div>
@@ -34,10 +34,10 @@ export default function intro() {
               transform: translate3d(0, 0, 0);
             }
             20% {
-              transform: translate3d(0, 55%, 0);
+              transform: translate3d(0, 50%, 0);
             }
             80% {
-              transform: translate3d(0, 55%, 0);
+              transform: translate3d(0, 50%, 0);
             }
             100% {
               transform: translate3d(0, 0, 0);
@@ -48,10 +48,10 @@ export default function intro() {
               transform: translate3d(0, 0, 0);
             }
             20% {
-              transform: translate3d(0, -55%, 0);
+              transform: translate3d(0, -50%, 0);
             }
             80% {
-              transform: translate3d(0, -55%, 0);
+              transform: translate3d(0, -50%, 0);
             }
             100% {
               transform: translate3d(0, 0, 0);
@@ -101,13 +101,20 @@ export default function intro() {
               scale: 1;
             }
             100% {
-              scale: 0.85;
+              scale: 0.8;
             }
           }
-
-          section {
-            width: 100%;
-            height: 100%;
+          .intro-container {
+            z-index: 1600;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
           }
           .page {
             position: fixed;
@@ -131,7 +138,7 @@ export default function intro() {
           }
           .up-side-2 {
             top: -100%;
-            background-color: rgb(179, 177, 178);
+            background-color: #d3d3d3;
             animation: slideInUp 2.5s ease-in 0.8s 1 normal;
           }
           .down-side-1 {
@@ -141,16 +148,14 @@ export default function intro() {
           }
           .down-side-2 {
             top: 100%;
-            background-color: rgb(179, 177, 178);
+            background-color: #d3d3d3;
             animation: slideInDown 2.5s ease-in 0.8s 1 normal;
           }
           .animated-logo {
-            height: 30vmin;
-            width: 30vmin;
+            width: 20rem;
+            height: 20rem;
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            animation: fade 2.5s ease-in 0.8s 1 normal;
           }
           .animated-logo > div {
             height: 50%;
