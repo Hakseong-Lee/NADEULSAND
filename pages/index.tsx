@@ -1,9 +1,8 @@
-import Intro from '@/components/Organisms/Intro';
-import IntroA from '@/components/Intro';
+import Layout from '@/components/Layout';
 export default function Home() {
   return (
     <>
-      <Intro />
+      <Layout />
     </>
   );
 }

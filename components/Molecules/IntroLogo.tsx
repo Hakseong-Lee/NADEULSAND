@@ -9,12 +9,12 @@ export default function Intro() {
       <LogoContainer>
         <LogoBox>
           <ImgBox>
-            <Image src={LogoTop} layout="responsive" alt="logotop"></Image>
+            <Image src={LogoTop} style={{ width: '100%', height: '100%' }} alt="logotop"></Image>
           </ImgBox>
         </LogoBox>
         <LogoBox className="logo-bottom">
           <ImgBox className="bottom">
-            <Image src={LogoBottom} layout="responsive" alt="logotop"></Image>
+            <Image src={LogoBottom} style={{ width: '100%', height: '100%' }} alt="logotop"></Image>
           </ImgBox>
         </LogoBox>
       </LogoContainer>
@@ -48,6 +48,10 @@ const LogoBox = styled.div`
   }
 `;
 const ImgBox = styled.div`
+  &.img {
+    width: 100px;
+    height: 100%;
+  }
   @keyframes showTopLogo {
     0% {
       transform: translate3d(0, 100%, 0);

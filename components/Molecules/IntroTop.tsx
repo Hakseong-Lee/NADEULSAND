@@ -52,7 +52,7 @@ const IntroTop = styled.div`
   }
 
   &.upper-1 {
-    background-color: rgb(82, 117, 120);
+    background-color: #527578;
     animation: slideInDown-1 2.5s linear 0.5s 1 normal;
   }
   &.upper-2 {

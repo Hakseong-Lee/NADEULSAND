@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import IntroTop from '@/components/Molecules/IntroTop';
 import IntroBottom from '@/components/Molecules/IntroBottom';
 import IntroLogo from '@/components/Molecules/IntroLogo';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export default function intro() {
+export default function Intro() {
   const [display, setdisplay] = useState<string>('');
   const [background, setbackground] = useState<string>('');
   setTimeout(() => {
@@ -31,7 +31,7 @@ const IntroContainer = styled.div`
   &.-transparent {
     background-color: transparent;
   }
-  z-index: 10;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: center;

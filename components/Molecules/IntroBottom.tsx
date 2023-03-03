@@ -39,10 +39,10 @@ const IntroBottom = styled.div`
       transform: translate3d(0, -40%, 0);
     }
     15% {
-      transform: translate3d(0, -50%, 0);
+      transform: translate3d(0, -51%, 0);
     }
     80% {
-      transform: translate3d(0, -50%, 0);
+      transform: translate3d(0, -51%, 0);
     }
     100% {
       transform: translate3d(0, 0, 0);
@@ -50,7 +50,7 @@ const IntroBottom = styled.div`
   }
 
   &.bottom-1 {
-    background-color: rgb(82, 117, 120);
+    background-color: #527578;
     animation: slideInUp-1 2.5s linear 0.5s 1 normal;
   }
   &.bottom-2 {
