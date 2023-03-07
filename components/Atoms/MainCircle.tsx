@@ -4,12 +4,12 @@ export default function circle() {
   return (
     <>
       <Circle />
-
     </>
   );
 }
 
 const Circle = styled.div`
+  z-index: 7;
   position: absolute;
   top: 50%;
   left: 50%;

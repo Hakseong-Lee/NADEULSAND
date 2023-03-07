@@ -1,18 +1,21 @@
 import styled, { css } from 'styled-components';
-import Circle from '../Atoms/Circle';
-import MainImgs from './../Molecules/MainImgs';
+import MainCircle from '../Atoms/MainCircle';
+import MainImgs from '../Molecules/SlideItem';
+import MainItemName from '../Molecules/MainItemName';
+import MainSlide from './../Organisms/MainSlide';
 export default function mainContainer() {
   return (
     <MainContainer>
-      <Circle />
-      <MainImgs />
+      <MainCircle />
+      <MainSlide />
     </MainContainer>
   );
 }
 const MainContainer = styled.div`
+  z-index: 800;
   width: 100vw;
   height: 100vh;
-  border: 10px solid #171b36;
+  overflow: hidden;
   ${({ theme }) => {
     return css`
       background-color: ${theme.colors.beige};

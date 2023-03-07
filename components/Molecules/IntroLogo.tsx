@@ -35,7 +35,7 @@ const LogoContainer = styled.div`
       scale: 0.85;
     }
   }
-  animation: fade 2.5s ease-in 0.8s 1 normal;
+  animation: fade 2.5s ease-in 1s 1 normal;
 `;
 const LogoBox = styled.div`
   height: 50%;
@@ -67,7 +67,7 @@ const ImgBox = styled.div`
     }
   }
   position: absolute;
-  animation: showTopLogo 3s ease 1s 1 normal;
+  animation: showTopLogo 3s ease 1.3s 1 normal;
   transform: translate(0, 100%);
 
   &.bottom {
@@ -85,7 +85,7 @@ const ImgBox = styled.div`
         transform: translate3d(0, -100%, 0);
       }
     }
-    animation: showBottomLogo 3s ease 1s 1 normal;
+    animation: showBottomLogo 3s ease 1.3s 1 normal;
     transform: translate(0, -100%);
   }
 `;

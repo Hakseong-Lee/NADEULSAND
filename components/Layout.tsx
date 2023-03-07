@@ -1,6 +1,7 @@
 import Intro from '@/components/Organisms/Intro';
 import Title from './Atoms/Title';
-import MainContainer from './Organisms/MainContainer';
+import Border from './Atoms/Border';
+import MainContainer from './Templates/MainContainer';
 export default function Layout() {
   return (
     <>
@@ -9,6 +10,7 @@ export default function Layout() {
         <Title />
       </header>
       <main>
+        <Border />
         <MainContainer />
       </main>
     </>
