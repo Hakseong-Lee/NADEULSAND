@@ -2,52 +2,61 @@ import styled from 'styled-components';
 import { listItems } from '../Atoms/ItemList';
 import ItemImg from './../Molecules/MainItemImg';
 import ItemName from './../Molecules/MainItemName';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
+import { currentIndexState } from '../Atoms/RecoilAtom';
 
-export default function mainSlide() {
-  const [currentItemNum, setCurrentItemNum] = useState<number>(0);
-  const ChangeNum = (currentItemNum: number) => {
-    switch (currentItemNum) {
-      case 0:
-        setCurrentItemNum((prev) => prev + 1);
-        break;
-      case 1:
-        setCurrentItemNum((prev) => prev + 1);
-        break;
-      case 2:
-        setCurrentItemNum(0);
-        break;
-    }
-  };
+const MainSlide = () => {
   let introTransitionTime: number = 2000;
   let slideTransitionTime: number = 6000;
   const [time, setTime] = useState<number>(introTransitionTime + slideTransitionTime);
+  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
+
   setTimeout(() => {
     setTime(slideTransitionTime);
   }, introTransitionTime);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      ChangeNum(currentItemNum);
-    }, time);
-    return () => clearInterval(timer);
-  }, [currentItemNum]);
+
+  const useInterval = (callback: () => void, delay: number) => {
+    const savedCallback = useRef<any>();
+    console.log(savedCallback);
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  };
+
+  useInterval(() => {
+    setCurrentItemIndex((prev) => prev + 1);
+  }, time);
 
   return (
     <>
-      <MainSlide>
+      <Slide>
         <SlideList>
           {listItems.map((item, index: number) => (
             <SlideItem key={index}>
-              <ItemImg item={item} currentItemNum={currentItemNum} />
-              <ItemName item={item} currentItemNum={currentItemNum} />
+              <ItemImg item={item} index={index} />
+              <ItemName item={item} />
             </SlideItem>
           ))}
         </SlideList>
-      </MainSlide>
+      </Slide>
     </>
   );
-}
-const MainSlide = styled.div`
+};
+
+export default MainSlide;
+
+const Slide = styled.div`
   width: 100%;
   height: 100%;
 `;

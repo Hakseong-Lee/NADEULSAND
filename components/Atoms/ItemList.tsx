@@ -11,6 +11,12 @@ export interface ListItemsType {
 
 export const listItems: ListItemsType[] = [
   {
+    name: 'kakao',
+    nameArr: ['K', 'A', 'K', 'A', 'O'],
+    src: mainKakao,
+    num: 5,
+  },
+  {
     name: 'caramel',
     nameArr: ['C', 'A', 'R', 'A', 'M', 'E', 'L'],
     src: mainCaramel,
@@ -32,18 +38,12 @@ export const listItems: ListItemsType[] = [
     name: 'caramel',
     nameArr: ['C', 'A', 'R', 'A', 'M', 'E', 'L'],
     src: mainCaramel,
-    num: 0,
+    num: 3,
   },
   {
     name: 'strawberry',
     nameArr: ['S', 'T', 'R', 'A', 'W', 'B', 'E', 'R', 'R', 'Y'],
     src: mainStrawberry,
-    num: 1,
-  },
-  {
-    name: 'kakao',
-    nameArr: ['K', 'A', 'K', 'A', 'O'],
-    src: mainKakao,
-    num: 2,
+    num: 4,
   },
 ];

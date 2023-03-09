@@ -1,24 +1,26 @@
 import styled, { css } from 'styled-components';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { currentIndexState } from '../Atoms/RecoilAtom';
 interface PropsType {
   name: string;
   nameArr: string[];
   num: number;
 }
-export default function MainItemName({
-  item,
-  currentItemNum,
-}: {
-  item: PropsType;
-  currentItemNum: number;
-}) {
+export default function MainItemName({ item }: { item: PropsType }) {
+  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
   return (
     <>
       <NameContainer>
-        <NameWrap className={`${item.name}`} itemNum={item.num} currentItemNum={currentItemNum}>
+        <NameWrap className={`${item.name}`} itemNum={item.num} currentItemNum={currentItemIndex}>
           {item.nameArr.map((item: string, index: number) => {
             return (
-              <ItemName key={index} style={{ animationDelay: `${index / 10 + 3.2}s` }}>
+              <ItemName
+                key={index}
+                style={{
+                  animationDelay: `${index / 20 + 3.2}s`,
+                }}
+              >
                 {item}
               </ItemName>
             );
@@ -51,6 +53,7 @@ const NameWrap = styled.span<{ currentItemNum: number; itemNum: number }>`
       ${theme.flex.flexCenter};
     `;
   }};
+  transition: transform 3s ease-in-out;
   @keyframes itemName-in {
     0% {
       transform: translate(20px, 0);
@@ -61,7 +64,6 @@ const NameWrap = styled.span<{ currentItemNum: number; itemNum: number }>`
       opacity: 1;
     }
   }
-  transition: itemName-in 3s ease-in-out;
   @keyframes name-start {
     0% {
       opacity: 0;
@@ -84,8 +86,6 @@ const ItemName = styled.span`
       font-weight: ${theme.font.weight.normal};
     `;
   }};
-  opacity: 1;
-  animation: name-start 1.5s 1 linear 3s;
 `;
 const SubName = styled.span`
   ${({ theme }) => {
