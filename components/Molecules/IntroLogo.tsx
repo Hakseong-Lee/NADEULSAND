@@ -3,7 +3,7 @@ import Image from 'next/image';
 import LogoTop from '@/public/assets/img/logoTop.png';
 import LogoBottom from '@/public/assets/img/logoBottom.png';
 
-export default function Intro() {
+const Intro = () => {
   return (
     <>
       <LogoContainer>
@@ -20,7 +20,8 @@ export default function Intro() {
       </LogoContainer>
     </>
   );
-}
+};
+export default Intro;
 
 const LogoContainer = styled.div`
   width: 28rem;

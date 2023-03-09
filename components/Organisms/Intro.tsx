@@ -4,7 +4,7 @@ import IntroBottom from '@/components/Molecules/IntroBottom';
 import IntroLogo from '@/components/Molecules/IntroLogo';
 import { useState } from 'react';
 
-export default function Intro() {
+const Intro = () => {
   const [display, setdisplay] = useState<string>('');
   const [background, setbackground] = useState<string>('');
   setTimeout(() => {
@@ -22,7 +22,8 @@ export default function Intro() {
       </IntroContainer>
     </>
   );
-}
+};
+export default Intro;
 
 const IntroContainer = styled.div`
   &.-hide {

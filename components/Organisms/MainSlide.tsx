@@ -4,14 +4,14 @@ import ItemImg from './../Molecules/MainItemImg';
 import ItemName from './../Molecules/MainItemName';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { currentIndexState } from '../Atoms/RecoilAtom';
+import { currentIndexState } from '../../Recoil/atoms';
 import { useInterval } from '@/hooks/customHooks';
 
 const MainSlide = () => {
+  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
   let introTransitionTime: number = 2000;
   let slideTransitionTime: number = 6000;
   const [time, setTime] = useState<number>(introTransitionTime + slideTransitionTime);
-  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
 
   //intro 화면 전환 후 index 변화
   setTimeout(() => {
@@ -33,6 +33,7 @@ const MainSlide = () => {
             </SlideItem>
           ))}
         </SlideList>
+        <Border />
       </Slide>
     </>
   );
@@ -49,4 +50,10 @@ const SlideList = styled.ul`
 `;
 const SlideItem = styled.li`
   display: list-item;
+`;
+const Border = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  border: 10px solid #171b36;
 `;

@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { currentIndexState } from '../Atoms/RecoilAtom';
+import { currentIndexState } from '../../Recoil/atoms';
+
 interface PropsType {
   name: string;
   nameArr: string[];
   num: number;
 }
-export default function MainItemName({ item }: { item: PropsType }) {
+
+const MainItemName = ({ item }: { item: PropsType }) => {
   const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
   return (
     <>
@@ -30,7 +32,9 @@ export default function MainItemName({ item }: { item: PropsType }) {
       </NameContainer>
     </>
   );
-}
+};
+
+export default MainItemName;
 const NameContainer = styled.h2`
   ${({ theme }) => {
     return css`

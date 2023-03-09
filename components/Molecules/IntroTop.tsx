@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-export default function Intro() {
+const Intro = () => {
   return (
     <>
       <IntroTop className="upper-1"></IntroTop>
       <IntroTop className="upper-2"></IntroTop>
     </>
   );
-}
+};
+export default Intro;
 
 const IntroTop = styled.div`
   position: fixed;

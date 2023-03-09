@@ -1,12 +1,15 @@
 import styled from 'styled-components';
-export default function Intro() {
+
+const Intro = () => {
   return (
     <>
       <IntroBottom className="bottom-1"></IntroBottom>
       <IntroBottom className="bottom-2"></IntroBottom>
     </>
   );
-}
+};
+export default Intro;
+
 const IntroBottom = styled.div`
   position: fixed;
   left: 0;

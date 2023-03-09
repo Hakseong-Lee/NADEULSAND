@@ -1,8 +1,7 @@
 import Intro from '@/components/Organisms/Intro';
 import Title from './Atoms/Title';
-import Border from './Atoms/Border';
 import MainContainer from './Templates/MainContainer';
-export default function Layout() {
+const Layout = () => {
   return (
     <>
       <Intro />
@@ -10,9 +9,9 @@ export default function Layout() {
         <Title />
       </header>
       <main>
-        <Border />
         <MainContainer />
       </main>
     </>
   );
-}
+};
+export default Layout;

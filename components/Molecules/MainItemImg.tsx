@@ -3,25 +3,26 @@ import Image from 'next/image';
 import { ListItemsType } from '../Atoms/ItemList';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { currentIndexState } from '../Atoms/RecoilAtom';
+import { currentIndexState } from '../../Recoil/atoms';
 
-export default function mainItemImg({ item, index }: { item: ListItemsType; index: number }) {
+const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) => {
+  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
+  const itemList: number = 3;
   const transitionTime: number = 3;
   const transitionStyle: string = `transform ${transitionTime}s ease-in-out`;
   const [transition, setTransition] = useState<string>(transitionStyle);
-  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
 
   const replaceSlide = () => {
     setTimeout(() => {
       setTransition('');
       setCurrentItemIndex(0);
-    }, transitionTime * 1000);
+    }, transitionTime * 1000 + 10);
     setTimeout(() => {
       setTransition(transitionStyle);
     }, transitionTime * 1000 + 100);
   };
 
-  if (currentItemIndex === 3) {
+  if (currentItemIndex === itemList) {
     replaceSlide();
   }
   return (
@@ -38,10 +39,11 @@ export default function mainItemImg({ item, index }: { item: ListItemsType; inde
       </ImgWrap>
     </>
   );
-}
+};
+
+export default MainItemImg;
 
 const ImgWrap = styled.span`
-  z-index: 8;
   filter: drop-shadow(10px 20px 4px rgba(0, 0, 0, 0.15));
   width: 32rem;
   height: 32rem;
