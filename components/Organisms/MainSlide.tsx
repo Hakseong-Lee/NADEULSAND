@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { listItems } from '../Atoms/ItemList';
 import ItemImg from './../Molecules/MainItemImg';
 import ItemName from './../Molecules/MainItemName';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { currentIndexState } from '../Atoms/RecoilAtom';
+import { useInterval } from '@/hooks/customHooks';
 
 const MainSlide = () => {
   let introTransitionTime: number = 2000;
@@ -12,27 +13,10 @@ const MainSlide = () => {
   const [time, setTime] = useState<number>(introTransitionTime + slideTransitionTime);
   const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
 
+  //intro 화면 전환 후 index 변화
   setTimeout(() => {
     setTime(slideTransitionTime);
   }, introTransitionTime);
-
-  const useInterval = (callback: () => void, delay: number) => {
-    const savedCallback = useRef<any>();
-    console.log(savedCallback);
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
-    useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (delay !== null) {
-        let id = setInterval(tick, delay);
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-  };
 
   useInterval(() => {
     setCurrentItemIndex((prev) => prev + 1);
