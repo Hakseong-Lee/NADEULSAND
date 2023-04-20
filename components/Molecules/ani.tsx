@@ -1,17 +1,25 @@
-@keyframes itemName-in{
+  @keyframes itemName-in {
     0% {
       transform: translate(20px, 0);
       opacity: 0;
+    }
+    50% {
+      transform: translate(0, 0);
+      opacity: 1;
     }
     100% {
       transform: translate(0, 0);
       opacity: 1;
     }
   }
-@keyframes itemName-out {
+  @keyframes itemName-out {
     0% {
       transform: translate(20px, 0);
       opacity: 1;
+    }
+    50% {
+      transform: translate(0, 0);
+      opacity: 0;
     }
     100% {
       transform: translate(0, 0);

@@ -6,44 +6,50 @@ export interface ListItemsType {
   name: string;
   nameArr: string[];
   src: any;
-  num: number;
+  index: number;
 }
 
 export const listItems: ListItemsType[] = [
   {
-    name: 'kakao',
-    nameArr: ['K', 'A', 'K', 'A', 'O'],
-    src: mainKakao,
-    num: 5,
-  },
-  {
-    name: 'caramel',
-    nameArr: ['C', 'A', 'R', 'A', 'M', 'E', 'L'],
-    src: mainCaramel,
-    num: 0,
-  },
-  {
     name: 'strawberry',
     nameArr: ['S', 'T', 'R', 'A', 'W', 'B', 'E', 'R', 'R', 'Y'],
     src: mainStrawberry,
-    num: 1,
+    index: -2,
   },
   {
     name: 'kakao',
     nameArr: ['K', 'A', 'K', 'A', 'O'],
     src: mainKakao,
-    num: 2,
+    index: -1,
   },
   {
     name: 'caramel',
     nameArr: ['C', 'A', 'R', 'A', 'M', 'E', 'L'],
     src: mainCaramel,
-    num: 3,
+    index: 0,
   },
   {
     name: 'strawberry',
     nameArr: ['S', 'T', 'R', 'A', 'W', 'B', 'E', 'R', 'R', 'Y'],
     src: mainStrawberry,
-    num: 4,
+    index: 1,
+  },
+  {
+    name: 'kakao',
+    nameArr: ['K', 'A', 'K', 'A', 'O'],
+    src: mainKakao,
+    index: 2,
+  },
+  {
+    name: 'caramel',
+    nameArr: ['C', 'A', 'R', 'A', 'M', 'E', 'L'],
+    src: mainCaramel,
+    index: 3,
+  },
+  {
+    name: 'strawberry',
+    nameArr: ['S', 'T', 'R', 'A', 'W', 'B', 'E', 'R', 'R', 'Y'],
+    src: mainStrawberry,
+    index: 4,
   },
 ];

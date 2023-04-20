@@ -8,3 +8,7 @@ ol,
 ul {
   list-style-type: none;
 }
+
+a {
+  cursor: pointer;
+}

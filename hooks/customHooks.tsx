@@ -15,3 +15,31 @@ export const useInterval = (callback: () => void, delay: number) => {
     }
   }, [delay]);
 };
+
+export const useThrottle = (callback: () => void, delay: number) => {
+  let timer = useRef<boolean>(false);
+  return function () {
+    console.log('click');
+    if (timer.current) return;
+    if (!timer.current) {
+      console.log('change');
+      callback();
+      timer.current = true;
+      setTimeout(() => {
+        timer.current = false;
+      }, delay);
+    }
+  };
+};
+export const useDebounce = (callback: () => void, delay: number) => {
+  let timer: any;
+  return function () {
+    console.log('click');
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      console.log('change');
+      timer = null;
+      callback();
+    }, delay);
+  };
+};

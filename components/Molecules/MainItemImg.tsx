@@ -1,37 +1,40 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import { ListItemsType } from '../Atoms/ItemList';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { currentIndexState } from '../../Recoil/atoms';
+import { ListItemsType } from '../Atoms/ItemList';
 
 const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) => {
   const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
   const itemList: number = 3;
-  const transitionTime: number = 3;
+  const transitionTime: number = 2.5;
   const transitionStyle: string = `transform ${transitionTime}s ease-in-out`;
   const [transition, setTransition] = useState<string>(transitionStyle);
 
-  const replaceSlide = () => {
+  const replaceSlide = (index: number) => {
     setTimeout(() => {
+      setCurrentItemIndex(index);
       setTransition('');
-      setCurrentItemIndex(0);
     }, transitionTime * 1000 + 10);
     setTimeout(() => {
       setTransition(transitionStyle);
     }, transitionTime * 1000 + 100);
   };
-
   if (currentItemIndex === itemList) {
-    replaceSlide();
+    replaceSlide(0);
   }
+  if (currentItemIndex === -1) {
+    replaceSlide(2);
+  }
+
   return (
     <>
       <ImgWrap
-        className={`${item.name} ${item.num}`}
+        className={`${item.name} ${item.index}`}
         style={{
           marginLeft: `${index * 52}rem`,
-          transform: `translateX(-${currentItemIndex * 52}rem)`,
+          transform: `translateX(${currentItemIndex * -52}rem)`,
           transition: `${transition}`,
         }}
       >
@@ -44,12 +47,11 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
 export default MainItemImg;
 
 const ImgWrap = styled.span`
-  filter: drop-shadow(10px 20px 4px rgba(0, 0, 0, 0.15));
   width: 32rem;
   height: 32rem;
   position: absolute;
   top: 50%;
-  left: -7%;
+  left: -50%;
   margin-top: -22rem;
   will-change: transform;
 
@@ -70,5 +72,5 @@ const ImgWrap = styled.span`
       transform: translate3d(0, 0, 0);
     }
   }
-  animation: img-start 6s 1 ease-in-out 1.5s;
+  animation: img-start 6s 1 ease-in-out 1.9s;
 `;

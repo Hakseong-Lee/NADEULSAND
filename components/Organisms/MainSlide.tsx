@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { listItems } from '../Atoms/ItemList';
-import ItemImg from './../Molecules/MainItemImg';
-import ItemName from './../Molecules/MainItemName';
 import { useState } from 'react';
+import { listItems } from '../Atoms/ItemList';
 import { useRecoilState } from 'recoil';
 import { currentIndexState } from '../../Recoil/atoms';
 import { useInterval } from '@/hooks/customHooks';
+import ItemImg from './../Molecules/MainItemImg';
+import ItemName from './../Molecules/MainItemName';
+import SlideNav from '../Molecules/MainSlideNav';
 
 const MainSlide = () => {
   const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
@@ -33,6 +34,7 @@ const MainSlide = () => {
             </SlideItem>
           ))}
         </SlideList>
+        <SlideNav />
         <Border />
       </Slide>
     </>
