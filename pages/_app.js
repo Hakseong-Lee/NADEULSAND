@@ -1,15 +1,19 @@
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { RecoilRoot } from 'recoil';
+import { Provider } from 'react-redux';
+import store from '../store';
 import '../styles/globalstyle.css';
 import theme from '../styles/theme';
 
 const App = ({ Component, pageProps }) => {
   return (
-    <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </RecoilRoot>
+    <React.StrictMode>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </Provider>
+    </React.StrictMode>
   );
 };
 

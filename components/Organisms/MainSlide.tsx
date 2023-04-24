@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { listItems } from '../Atoms/ItemList';
-import { useRecoilState } from 'recoil';
-import { currentIndexState } from '../../Recoil/atoms';
 import { useInterval } from '@/hooks/customHooks';
+import { useSelector, useDispatch } from 'react-redux';
+import { SlideStateType, next } from '../../store/slide';
 import ItemImg from './../Molecules/MainItemImg';
 import ItemName from './../Molecules/MainItemName';
 import SlideNav from '../Molecules/MainSlideNav';
 
 const MainSlide = () => {
-  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
-  let introTransitionTime: number = 2000;
-  let slideTransitionTime: number = 6000;
+  let introTransitionTime: number = 2000,
+    slideTransitionTime: number = 6000;
+  const currentIndex = useSelector((state: SlideStateType) => state.currentIndex);
+  const dispatch = useDispatch();
+
   const [time, setTime] = useState<number>(introTransitionTime + slideTransitionTime);
 
   //intro 화면 전환 후 index 변화
@@ -20,7 +22,7 @@ const MainSlide = () => {
   }, introTransitionTime);
 
   useInterval(() => {
-    setCurrentItemIndex((prev) => prev + 1);
+    dispatch(next());
   }, time);
 
   return (
