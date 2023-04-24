@@ -2,27 +2,33 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { listItems } from '../Atoms/ItemList';
 import { useInterval } from '@/hooks/customHooks';
-import { useSelector, useDispatch } from 'react-redux';
-import { SlideStateType, next } from '../../store/slide';
-import ItemImg from './../Molecules/MainItemImg';
-import ItemName from './../Molecules/MainItemName';
-import SlideNav from '../Molecules/MainSlideNav';
+import { useDispatch, useSelector } from 'react-redux';
+import { SliderStateType, next, scroll } from '../../store/slider';
+import ItemImg from '../Molecules/Slider/ItemImg';
+import ItemName from './../Molecules/Slider/ItemName';
+import SliderNav from '../Molecules/Slider/SliderNav';
+
+export const introTransitionTime: number = 2000,
+  sliderTransitionTime: number = 6000,
+  animationTime: number = 4000;
 
 const MainSlide = () => {
-  let introTransitionTime: number = 2000,
-    slideTransitionTime: number = 6000;
-  const currentIndex = useSelector((state: SlideStateType) => state.currentIndex);
   const dispatch = useDispatch();
+  const isAuto = useSelector((state: SliderStateType) => state.autoScroll);
+  const [time, setTime] = useState<number>(introTransitionTime + sliderTransitionTime);
 
-  const [time, setTime] = useState<number>(introTransitionTime + slideTransitionTime);
-
-  //intro 화면 전환 후 index 변화
+  //TODO: 애니메이션 효과 들어오고 나가고 분리하고 시간 조정
   setTimeout(() => {
-    setTime(slideTransitionTime);
+    setTime(sliderTransitionTime);
   }, introTransitionTime);
 
   useInterval(() => {
-    dispatch(next());
+    if (isAuto) {
+      dispatch(next());
+      setTimeout(() => {
+        dispatch(scroll());
+      }, animationTime);
+    }
   }, time);
 
   return (
@@ -36,7 +42,7 @@ const MainSlide = () => {
             </SlideItem>
           ))}
         </SlideList>
-        <SlideNav />
+        <SliderNav />
         <Border />
       </Slide>
     </>

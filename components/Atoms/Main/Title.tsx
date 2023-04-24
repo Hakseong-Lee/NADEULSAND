@@ -1,9 +1,5 @@
 import styled, { css } from 'styled-components';
 
-export default function title() {
-  return <Title>NADEUL SAND COOKIE</Title>;
-}
-
 const Title = styled.h1`
   position: absolute;
   width: 100vw;
@@ -32,3 +28,5 @@ const Title = styled.h1`
   }
   animation: title-start 2s 1 linear 3s;
 `;
+
+export default Title;

@@ -1,12 +1,12 @@
 import Intro from '@/components/Organisms/Intro';
-import Title from './Atoms/Title';
+import Title from './Atoms/Main/Title';
 import MainContainer from './Templates/MainContainer';
 const Layout = () => {
   return (
     <>
       <Intro />
       <header>
-        <Title />
+        <Title>NADEUL SAND COOKIE</Title>
       </header>
       <main>
         <MainContainer />

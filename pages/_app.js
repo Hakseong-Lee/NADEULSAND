@@ -1,9 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
-import store from '../store';
+import { createStore } from 'redux';
+import sliderSlice from './../store/slider';
 import '../styles/globalstyle.css';
 import theme from '../styles/theme';
+
+const store = createStore(sliderSlice);
 
 const App = ({ Component, pageProps }) => {
   return (

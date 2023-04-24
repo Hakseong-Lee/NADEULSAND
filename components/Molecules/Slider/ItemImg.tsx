@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { currentIndexState } from '../../Recoil/atoms';
-import { ListItemsType } from '../Atoms/ItemList';
+import { ListItemsType } from '../../Atoms/ItemList';
+import { useDispatch, useSelector } from 'react-redux';
+import { SliderStateType, changeIndex } from '../../../store/slider';
 
 const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) => {
-  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
+  const dispatch = useDispatch();
+  const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
+
   const itemList: number = 3;
   const transitionTime: number = 2.5;
   const transitionStyle: string = `transform ${transitionTime}s ease-in-out`;
@@ -14,19 +16,16 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
 
   const replaceSlide = (index: number) => {
     setTimeout(() => {
-      setCurrentItemIndex(index);
+      dispatch(changeIndex(index));
       setTransition('');
     }, transitionTime * 1000 + 10);
     setTimeout(() => {
       setTransition(transitionStyle);
     }, transitionTime * 1000 + 100);
   };
-  if (currentItemIndex === itemList) {
-    replaceSlide(0);
-  }
-  if (currentItemIndex === -1) {
-    replaceSlide(2);
-  }
+
+  if (currentIndex === itemList) replaceSlide(0);
+  if (currentIndex === -1) replaceSlide(2);
 
   return (
     <>
@@ -34,7 +33,7 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
         className={`${item.name} ${item.index}`}
         style={{
           marginLeft: `${index * 52}rem`,
-          transform: `translateX(${currentItemIndex * -52}rem)`,
+          transform: `translateX(${currentIndex * -52}rem)`,
           transition: `${transition}`,
         }}
       >

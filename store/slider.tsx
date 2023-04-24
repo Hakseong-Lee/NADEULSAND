@@ -1,21 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface SlideStateType {
+export interface SliderStateType {
   currentIndex: number;
   scrollable: boolean;
   autoScroll: boolean;
 }
 
-const initialSlideState: SlideStateType = {
+const initialSliderState: SliderStateType = {
   currentIndex: 0,
   scrollable: false,
   autoScroll: true,
 };
 
-const slideSlice = createSlice({
-  name: 'slide',
-  initialState: initialSlideState,
+const sliderSlice = createSlice({
+  name: 'slider',
+  initialState: initialSliderState,
   reducers: {
+    changeIndex(state, action) {
+      state.currentIndex = action.payload;
+    },
     next(state) {
       state.currentIndex++;
       state.scrollable = false;
@@ -25,7 +28,7 @@ const slideSlice = createSlice({
       state.scrollable = false;
       state.autoScroll = false;
     },
-    previousBtn(state) {
+    prevBtn(state) {
       state.currentIndex--;
       state.scrollable = false;
       state.autoScroll = false;
@@ -39,5 +42,5 @@ const slideSlice = createSlice({
   },
 });
 
-export const { next, nextBtn, previousBtn, scroll, auto } = slideSlice.actions;
-export default slideSlice.reducer;
+export const { changeIndex, next, nextBtn, prevBtn, scroll, auto } = sliderSlice.actions;
+export default sliderSlice.reducer;

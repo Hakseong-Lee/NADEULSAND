@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import MainCircle from '../Atoms/MainCircle';
-import MainSlide from './../Organisms/MainSlide';
+import MainCircle from '../Atoms/Main/Circle';
+import MainSlide from '../Organisms/MainSlider';
 
 const MainContainer = () => {
   return (

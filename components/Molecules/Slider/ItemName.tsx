@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components';
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { currentIndexState } from '../../Recoil/atoms';
-
+import { useSelector } from 'react-redux';
+import { SliderStateType } from '../../../store/slider';
 interface PropsType {
   name: string;
   nameArr: string[];
@@ -10,11 +8,11 @@ interface PropsType {
 }
 
 const MainItemName = ({ item }: { item: PropsType }) => {
-  const [currentItemIndex, setCurrentItemIndex] = useRecoilState<number>(currentIndexState);
+  const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
   return (
     <>
       <NameContainer>
-        <NameWrap className={`${item.name}`} itemNum={item.index} currentItemNum={currentItemIndex}>
+        <NameWrap className={`${item.name}`} itemNum={item.index} currentItemNum={currentIndex}>
           {item.nameArr.map((item: string, index: number) => {
             return (
               <ItemName
