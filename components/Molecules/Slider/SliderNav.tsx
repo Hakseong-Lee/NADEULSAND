@@ -9,14 +9,13 @@ const SliderNav = () => {
   const dispatch = useDispatch();
   const isActive = useSelector((state: SliderStateType) => state.scrollable);
 
-  console.log(isActive);
   const handlePrev = () => {
     if (isActive) {
       dispatch(prevBtn());
       setTimeout(() => {
         dispatch(scroll());
         dispatch(auto());
-      }, animationTime);
+      }, animationTime + 1000);
     }
   };
   const handleNext = () => {
@@ -25,7 +24,7 @@ const SliderNav = () => {
       setTimeout(() => {
         dispatch(scroll());
         dispatch(auto());
-      }, animationTime);
+      }, animationTime + 1000);
     }
   };
   return (

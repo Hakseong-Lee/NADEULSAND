@@ -10,18 +10,16 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
   const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
 
   const itemList: number = 3;
-  const transitionTime: number = 2.5;
-  const transitionStyle: string = `transform ${transitionTime}s ease-in-out`;
-  const [transition, setTransition] = useState<string>(transitionStyle);
-
+  const transitionTime: number = 2;
+  const [transition, setTransition] = useState<boolean>(true);
   const replaceSlide = (index: number) => {
     setTimeout(() => {
       dispatch(changeIndex(index));
-      setTransition('');
+      setTransition(false);
     }, transitionTime * 1000 + 10);
     setTimeout(() => {
-      setTransition(transitionStyle);
-    }, transitionTime * 1000 + 100);
+      setTransition(true);
+    }, transitionTime * 1000 + 50);
   };
 
   if (currentIndex === itemList) replaceSlide(0);
@@ -34,7 +32,7 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
         style={{
           marginLeft: `${index * 52}rem`,
           transform: `translateX(${currentIndex * -52}rem)`,
-          transition: `${transition}`,
+          transition: transition ? `transform ${transitionTime}s ease-in-out` : '',
         }}
       >
         <Image src={item.src} style={{ width: '100%', height: '100%' }} alt={item.name}></Image>
@@ -58,18 +56,15 @@ const ImgWrap = styled.span`
     0% {
       transform: translate3d(500%, 0, 0);
     }
-    20% {
+    40% {
       transform: translate3d(500%, 0, 0);
     }
-    50% {
+    80% {
       transform: translate3d(-25%, 0, 0);
-    }
-    60% {
-      transform: translate3d(0, 0, 0);
     }
     100% {
       transform: translate3d(0, 0, 0);
     }
   }
-  animation: img-start 6s 1 ease-in-out 1.9s;
+  animation: img-start 4.5s 1 ease-in-out 1.4s;
 `;

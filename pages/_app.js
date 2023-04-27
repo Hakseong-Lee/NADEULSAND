@@ -10,13 +10,11 @@ const store = createStore(sliderSlice);
 
 const App = ({ Component, pageProps }) => {
   return (
-    <React.StrictMode>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </Provider>
-    </React.StrictMode>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Provider>
   );
 };
 

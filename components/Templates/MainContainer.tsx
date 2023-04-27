@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 import MainCircle from '../Atoms/Main/Circle';
-import MainSlide from '../Organisms/MainSlider';
+import MainSlider from '../Organisms/MainSlider';
 
 const MainContainer = () => {
   return (
     <Container>
       <MainCircle />
-      <MainSlide />
+      <MainSlider />
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { listItems } from '../Atoms/ItemList';
 import { useInterval } from '@/hooks/customHooks';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,26 +8,29 @@ import ItemImg from '../Molecules/Slider/ItemImg';
 import ItemName from './../Molecules/Slider/ItemName';
 import SliderNav from '../Molecules/Slider/SliderNav';
 
-export const introTransitionTime: number = 2000,
-  sliderTransitionTime: number = 6000,
-  animationTime: number = 4000;
+export const introTransitionTime: number = 6000,
+  sliderTransitionTime: number = 5000,
+  animationTime: number = 2000;
 
 const MainSlide = () => {
   const dispatch = useDispatch();
   const isAuto = useSelector((state: SliderStateType) => state.autoScroll);
-  const [time, setTime] = useState<number>(introTransitionTime + sliderTransitionTime);
+  const [time, setTime] = useState<number>(6000);
 
-  //TODO: 애니메이션 효과 들어오고 나가고 분리하고 시간 조정
-  setTimeout(() => {
-    setTime(sliderTransitionTime);
-  }, introTransitionTime);
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setTime(sliderTransitionTime);
+    }, 3000);
+    return () => clearTimeout(timerId);
+  }, []);
 
+  //TODO: 처음 시작했을 때 스크롤 가능하게 만들기
   useInterval(() => {
     if (isAuto) {
       dispatch(next());
       setTimeout(() => {
         dispatch(scroll());
-      }, animationTime);
+      }, animationTime + 1000);
     }
   }, time);
 

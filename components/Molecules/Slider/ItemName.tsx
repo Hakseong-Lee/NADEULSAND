@@ -1,27 +1,44 @@
 import styled, { css } from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import { SliderStateType } from '../../../store/slider';
-interface PropsType {
-  name: string;
-  nameArr: string[];
-  index: number;
-}
+import { ListItemsType } from '../../Atoms/ItemList';
 
-const MainItemName = ({ item }: { item: PropsType }) => {
+const MainItemName = ({ item }: { item: ListItemsType }) => {
   const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
+  const itemList: number = 3;
+  const transitionTime: number = 2000;
+  const [transition, setTransition] = useState<boolean>(true);
+  //TODO: replace시 잠깐 멈추는거 수정하기
+  const replaceTransition = () => {
+    setTimeout(() => {
+      setTransition(false);
+    }, transitionTime + 1000);
+    setTimeout(() => {
+      setTransition(true);
+    }, transitionTime + 1050);
+  };
+  if (currentIndex === itemList) replaceTransition();
+  if (currentIndex === -1) replaceTransition();
   return (
     <>
       <NameContainer>
-        <NameWrap className={`${item.name}`} itemNum={item.index} currentItemNum={currentIndex}>
-          {item.nameArr.map((item: string, index: number) => {
+        <NameWrap>
+          {item.nameArr.map((name: string, index: number) => {
             return (
               <ItemName
                 key={index}
                 style={{
-                  animationDelay: `${index / 15 + 6.6}s`,
+                  transform: `translateX(${(item.index - currentIndex) * 20}px)`,
+                  opacity: item.index === currentIndex ? 1 : 0,
+                  transition: transition
+                    ? `transform 1s linear ${index / 10 + 1}s, opacity 0.5s linear ${
+                        index / 10 + 1
+                      }s`
+                    : '',
                 }}
               >
-                {item}
+                {name}
               </ItemName>
             );
           })}
@@ -46,8 +63,7 @@ const NameContainer = styled.h2`
   text-align: center;
   transform: translateX(-50%);
 `;
-const NameWrap = styled.span<{ currentItemNum: number; itemNum: number }>`
-  visibility: ${(props) => (props.currentItemNum === props.itemNum ? 'visible' : 'hidden')};
+const NameWrap = styled.span`
   ${({ theme }) => {
     return css`
       ${theme.flex.flexCenter};
@@ -66,32 +82,6 @@ const NameWrap = styled.span<{ currentItemNum: number; itemNum: number }>`
       transform: translate3d(0, 0%, 0) rotateX(0deg);
     }
   }
-  @keyframes itemName {
-    0% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-    5% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-    10% {
-      transform: translate(-20px, 0);
-      opacity: 0;
-    }
-    50% {
-      transform: translate(20px, 0);
-      opacity: 0;
-    }
-    60% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-    100% {
-      transform: translate(0, 0);
-      opacity: 1;
-    }
-  }
   animation: name-start 2s 1 linear 3s;
 `;
 const ItemName = styled.span`
@@ -101,7 +91,6 @@ const ItemName = styled.span`
       font-weight: ${theme.font.weight.normal};
     `;
   }};
-  animation: itemName 6s infinite linear;
 `;
 const SubName = styled.span`
   ${({ theme }) => {

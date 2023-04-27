@@ -4,12 +4,14 @@ export interface SliderStateType {
   currentIndex: number;
   scrollable: boolean;
   autoScroll: boolean;
+  transition: boolean;
 }
 
 const initialSliderState: SliderStateType = {
   currentIndex: 0,
   scrollable: false,
   autoScroll: true,
+  transition: true,
 };
 
 const sliderSlice = createSlice({
@@ -18,6 +20,11 @@ const sliderSlice = createSlice({
   reducers: {
     changeIndex(state, action) {
       state.currentIndex = action.payload;
+      state.scrollable = false;
+    },
+    changeTransition(state, action) {
+      state.transition = action.payload;
+      state.scrollable = false;
     },
     next(state) {
       state.currentIndex++;
@@ -42,5 +49,6 @@ const sliderSlice = createSlice({
   },
 });
 
-export const { changeIndex, next, nextBtn, prevBtn, scroll, auto } = sliderSlice.actions;
+export const { changeIndex, changeTransition, next, nextBtn, prevBtn, scroll, auto } =
+  sliderSlice.actions;
 export default sliderSlice.reducer;
