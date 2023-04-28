@@ -16,10 +16,10 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
     setTimeout(() => {
       dispatch(changeIndex(index));
       setTransition(false);
-    }, transitionTime * 1000 + 10);
+    }, transitionTime * 1400 + 10);
     setTimeout(() => {
       setTransition(true);
-    }, transitionTime * 1000 + 50);
+    }, transitionTime * 1400 + 50);
   };
 
   if (currentIndex === itemList) replaceSlide(0);

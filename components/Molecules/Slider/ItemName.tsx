@@ -9,14 +9,14 @@ const MainItemName = ({ item }: { item: ListItemsType }) => {
   const itemList: number = 3;
   const transitionTime: number = 2000;
   const [transition, setTransition] = useState<boolean>(true);
-  //TODO: replace시 잠깐 멈추는거 수정하기
+
   const replaceTransition = () => {
     setTimeout(() => {
       setTransition(false);
     }, transitionTime + 1000);
     setTimeout(() => {
       setTransition(true);
-    }, transitionTime + 1050);
+    }, transitionTime + 1020);
   };
   if (currentIndex === itemList) replaceTransition();
   if (currentIndex === -1) replaceTransition();
