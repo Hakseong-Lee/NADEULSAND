@@ -38,7 +38,7 @@ export default SliderNav;
 const Nav = styled.a`
   position: absolute;
   top: 0;
-  z-index: 10;
+
   height: 100%;
   width: 21.25rem;
   &.-prev {

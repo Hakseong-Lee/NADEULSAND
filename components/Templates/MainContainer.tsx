@@ -1,12 +1,9 @@
 import styled, { css } from 'styled-components';
-import MainCircle from '../Atoms/Main/Circle';
 import MainSlider from '../Organisms/MainSlider';
-import Carousel from './../Atoms/Main/ex';
 
 const MainContainer = () => {
   return (
     <Container>
-      <MainCircle />
       <MainSlider />
     </Container>
   );
@@ -17,7 +14,9 @@ const Container = styled.div`
   z-index: 800;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  position: fixed;
+  box-sizing: border-box;
+  border: 10px solid #171b36;
   ${({ theme }) => {
     return css`
       background-color: ${theme.colors.beige};

@@ -58,9 +58,9 @@ const NameContainer = styled.h2`
     `;
   }};
   position: absolute;
-  left: 50%;
-  top: 65%;
   text-align: center;
+  bottom: 8rem;
+  left: 50%;
   transform: translateX(-50%);
 `;
 const NameWrap = styled.span`
@@ -69,6 +69,16 @@ const NameWrap = styled.span`
       ${theme.flex.flexCenter};
     `;
   }};
+`;
+const ItemName = styled.span`
+  pointer-events: none;
+  ${({ theme }) => {
+    return css`
+      font-size: ${theme.font.size.subtitle};
+      font-weight: ${theme.font.weight.normal};
+    `;
+  }};
+
   @keyframes name-start {
     0% {
       opacity: 0;
@@ -78,27 +88,18 @@ const NameWrap = styled.span`
       transform: translate3d(0, -100%, 0) rotateX(-90deg);
     }
     100% {
-      opacity: 1;
       transform: translate3d(0, 0%, 0) rotateX(0deg);
     }
   }
   animation: name-start 2s 1 linear 3s;
 `;
-const ItemName = styled.span`
-  ${({ theme }) => {
-    return css`
-      font-size: ${theme.font.size.subtitle};
-      font-weight: ${theme.font.weight.normal};
-    `;
-  }};
-`;
 const SubName = styled.span`
+  pointer-events: none;
   ${({ theme }) => {
     return css`
       font-size: ${theme.font.size.paragraph};
       font-weight: ${theme.font.weight.light};
     `;
   }};
-  opacity: 0;
-  animation: itemName 6s infinite linear 0.5s;
+  animation: name-start 2s 1 linear 3s;
 `;

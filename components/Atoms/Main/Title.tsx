@@ -2,10 +2,11 @@ import styled, { css } from 'styled-components';
 
 const Title = styled.h1`
   position: absolute;
+  z-index: 900;
   width: 100vw;
   margin-top: 1rem;
   text-align: center;
-  z-index: 10;
+  pointer-events: none;
   ${({ theme }) => {
     return css`
       font-size: ${theme.font.size.title};

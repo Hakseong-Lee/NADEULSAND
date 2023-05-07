@@ -30,8 +30,7 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
       <ImgWrap
         className={`${item.name} ${item.index}`}
         style={{
-          marginLeft: `${index * 52}rem`,
-          transform: `translateX(${currentIndex * -52}rem)`,
+          transform: `translateX(${(index - currentIndex) * 60}rem)`,
           transition: transition ? `transform ${transitionTime}s ease-in-out` : '',
         }}
       >
@@ -44,26 +43,28 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
 export default MainItemImg;
 
 const ImgWrap = styled.span`
-  width: 32rem;
-  height: 32rem;
   position: absolute;
   top: 50%;
-  left: -50%;
-  margin-top: -22rem;
+  left: 50%;
   will-change: transform;
+
+  width: 35rem;
+  height: 35rem;
+  margin-top: -22rem;
+  margin-left: -138rem;
 
   @keyframes img-start {
     0% {
-      transform: translate3d(500%, 0, 0);
+      transform: translate3d(0, 0, 0);
     }
     40% {
       transform: translate3d(500%, 0, 0);
     }
     80% {
-      transform: translate3d(-25%, 0, 0);
+      transform: translate3d(200%, 0, 0);
     }
     100% {
-      transform: translate3d(0, 0, 0);
+      transform: translate3d(350%, 0, 0);
     }
   }
   animation: img-start 4.5s 1 ease-in-out 1.4s;

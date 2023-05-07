@@ -46,7 +46,6 @@ const MainSlide = () => {
           ))}
         </SlideList>
         <SliderNav />
-        <Border />
       </Slide>
     </>
   );
@@ -55,18 +54,12 @@ const MainSlide = () => {
 export default MainSlide;
 
 const Slide = styled.div`
-  width: 100%;
-  height: 100%;
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 `;
 const SlideList = styled.ul`
   display: block;
 `;
-const SlideItem = styled.li`
-  display: list-item;
-`;
-const Border = styled.div`
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  border: 10px solid #171b36;
-`;
+const SlideItem = styled.li``;
