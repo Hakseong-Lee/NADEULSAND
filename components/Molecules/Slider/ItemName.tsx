@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { SliderStateType } from '../../../store/slider';
@@ -70,16 +70,7 @@ const NameWrap = styled.span`
     `;
   }};
 `;
-const ItemName = styled.span`
-  pointer-events: none;
-  ${({ theme }) => {
-    return css`
-      font-size: ${theme.font.size.subtitle};
-      font-weight: ${theme.font.weight.normal};
-    `;
-  }};
-
-  @keyframes name-start {
+const NameStartAnimation = keyframes`
     0% {
       opacity: 0;
     }
@@ -90,8 +81,17 @@ const ItemName = styled.span`
     100% {
       transform: translate3d(0, 0%, 0) rotateX(0deg);
     }
-  }
-  animation: name-start 2s 1 linear 3s;
+`;
+const ItemName = styled.span`
+  pointer-events: none;
+  ${({ theme }) => {
+    return css`
+      font-size: ${theme.font.size.subtitle};
+      font-weight: ${theme.font.weight.normal};
+    `;
+  }};
+
+  animation: ${NameStartAnimation} 2s 1 linear 3s;
 `;
 const SubName = styled.span`
   pointer-events: none;
@@ -101,5 +101,5 @@ const SubName = styled.span`
       font-weight: ${theme.font.weight.light};
     `;
   }};
-  animation: name-start 2s 1 linear 3s;
+  animation: ${NameStartAnimation} 2s 1 linear 3s;
 `;

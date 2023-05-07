@@ -7,6 +7,7 @@ import { SliderStateType, next, scroll } from '../../store/slider';
 import ItemImg from '../Molecules/Slider/ItemImg';
 import ItemName from './../Molecules/Slider/ItemName';
 import SliderNav from '../Molecules/Slider/SliderNav';
+import Wave from '../Atoms/Main/Wave';
 
 export const introTransitionTime: number = 6000,
   sliderTransitionTime: number = 5000,
@@ -37,6 +38,7 @@ const MainSlide = () => {
   return (
     <>
       <Slide>
+        <Wave />
         <SlideList>
           {listItems.map((item, index: number) => (
             <SlideItem key={index}>
