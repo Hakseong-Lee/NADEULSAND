@@ -19,25 +19,25 @@ const font = {
 };
 
 const colors = {
-  white: '#ffff',
-  navy: '#171B36',
-  grey: '#999999',
-  caramel: '#B46B18',
-  beige: '#F3CFA5',
+  white: "#ffff",
+  navy: "#171B36",
+  grey: "#999999",
+  caramel: "#B46B18",
+  beige: "#F3CFA5",
 };
 
 const margins = {
-  sm: '.5rem',
-  base: '1rem',
-  lg: '2rem',
-  xl: '3rem',
+  sm: ".5rem",
+  base: "1rem",
+  lg: "2rem",
+  xl: "3rem",
 };
 
 const paddings = {
-  sm: '.5rem',
-  base: '1rem',
-  lg: '2rem',
-  xl: '3rem',
+  sm: ".5rem",
+  base: "1rem",
+  lg: "2rem",
+  xl: "3rem",
 };
 
 const flex = {
@@ -55,12 +55,12 @@ const flex = {
 };
 
 const size = {
-  mobile: '425px',
-  tablet: '768px',
-  laptopS: '1023px',
-  laptopM: '1239px',
-  desktopS: '1440px',
-  desktopL: '1800px',
+  mobile: "425px",
+  tablet: "768px",
+  laptopS: "1023px",
+  laptopM: "1239px",
+  desktopS: "1440px",
+  desktopL: "1800px",
 };
 
 const device = {

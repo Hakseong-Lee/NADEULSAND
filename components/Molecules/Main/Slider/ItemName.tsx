@@ -1,8 +1,8 @@
 import styled, { css, keyframes } from "styled-components";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { SliderStateType } from "../../../store/slider";
-import { ListItemsType } from "../../Atoms/ItemList";
+import { SliderStateType } from "../../../../store/slider";
+import { ListItemsType } from "../../../Atoms/ItemList";
 
 const MainItemName = ({ item }: { item: ListItemsType }) => {
   const currentIndex = useSelector(

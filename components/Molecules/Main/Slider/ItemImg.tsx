@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { useState } from "react";
-import { ListItemsType } from "../../Atoms/ItemList";
+import { ListItemsType } from "../../../Atoms/ItemList";
 import { useDispatch, useSelector } from "react-redux";
-import { SliderStateType, changeIndex } from "../../../store/slider";
+import { SliderStateType, changeIndex } from "../../../../store/slider";
 
 const MainItemImg = ({
   item,

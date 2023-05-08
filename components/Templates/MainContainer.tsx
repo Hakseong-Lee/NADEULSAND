@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import MainSlider from '../Organisms/MainSlider';
+import styled, { css } from "styled-components";
+import MainSlider from "../Organisms/MainSlider";
 
 const MainContainer = () => {
   return (
@@ -16,9 +16,10 @@ const Container = styled.div`
   height: 100vh;
   position: fixed;
   box-sizing: border-box;
-  border: 10px solid #171b36;
+
   ${({ theme }) => {
     return css`
+      border: 10px solid ${theme.colors.navy};
       background-color: ${theme.colors.beige};
       ${theme.flex.flexCenter};
     `;

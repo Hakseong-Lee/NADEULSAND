@@ -1,8 +1,11 @@
-import React from "react";
+import { colors } from "@/utils/variables";
+import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 
+// TODO: have to change a color of wave according to a currentItem
 const Wave = () => {
-  const color = "#B46B18";
+  const [color, setColor] = useState<string>(colors.beige);
+
   return (
     <>
       <Header>

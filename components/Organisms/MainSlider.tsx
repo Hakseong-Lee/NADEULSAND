@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import { listItems } from '../Atoms/ItemList';
-import { useInterval } from '@/hooks/customHooks';
-import { useDispatch, useSelector } from 'react-redux';
-import { SliderStateType, next, scroll } from '../../store/slider';
-import ItemImg from '../Molecules/Slider/ItemImg';
-import ItemName from './../Molecules/Slider/ItemName';
-import SliderNav from '../Molecules/Slider/SliderNav';
-import Wave from '../Atoms/Main/Wave';
+import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { listItems } from "../Atoms/ItemList";
+import { useInterval } from "@/hooks/customHooks";
+import { useDispatch, useSelector } from "react-redux";
+import { SliderStateType, next, scroll } from "../../store/slider";
+import ItemImg from "../Molecules/Main/Slider/ItemImg";
+import ItemName from "../Molecules/Main/Slider/ItemName";
+import SliderNav from "../Molecules/Main/Slider/SliderNav";
+import Wave from "../Molecules/Main/Wave";
 
 export const introTransitionTime: number = 6000,
   sliderTransitionTime: number = 5000,

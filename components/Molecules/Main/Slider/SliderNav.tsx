@@ -6,8 +6,8 @@ import {
   prevBtn,
   scroll,
   auto,
-} from "../../../store/slider";
-import { animationTime } from "../../Organisms/MainSlider";
+} from "../../../../store/slider";
+import { animationTime } from "../../../Organisms/MainSlider";
 
 const SliderNav = () => {
   const dispatch = useDispatch();
