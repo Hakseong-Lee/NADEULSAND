@@ -47,8 +47,8 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
 export default MainItemImg;
 
 const ImgWrap = styled.span`
-  width: 32rem;
-  height: 32rem;
+  width: 24rem;
+  height: 24rem;
   position: absolute;
   top: 50%;
   left: -50%;
