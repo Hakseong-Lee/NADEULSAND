@@ -4,31 +4,42 @@ import {
   SliderStateType,
   nextBtn,
   prevBtn,
-  scroll,
-  auto,
+  enableScroll,
+  disableScroll,
+  startAuto,
+  stopAuto,
 } from "../../../../store/slider";
-import { animationTime } from "../../../Organisms/MainSlider";
+import {
+  animationTime,
+  sliderChangingTime,
+} from "../../../Organisms/MainSlider";
 
 const SliderNav = () => {
   const dispatch = useDispatch();
-  const isActive = useSelector((state: SliderStateType) => state.scrollable);
+  const isScrollable = useSelector(
+    (state: SliderStateType) => state.scrollable
+  );
 
   const handlePrev = () => {
-    if (isActive) {
+    if (isScrollable) {
       dispatch(prevBtn());
+      dispatch(disableScroll());
+      dispatch(stopAuto());
       setTimeout(() => {
-        dispatch(scroll());
-        dispatch(auto());
-      }, animationTime + 1000);
+        dispatch(enableScroll());
+        dispatch(startAuto());
+      }, animationTime + sliderChangingTime);
     }
   };
   const handleNext = () => {
-    if (isActive) {
+    if (isScrollable) {
       dispatch(nextBtn());
+      dispatch(disableScroll());
+      dispatch(stopAuto());
       setTimeout(() => {
-        dispatch(scroll());
-        dispatch(auto());
-      }, animationTime + 1000);
+        dispatch(enableScroll());
+        dispatch(startAuto());
+      }, animationTime + sliderChangingTime);
     }
   };
   return (

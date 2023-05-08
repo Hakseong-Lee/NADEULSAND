@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface SliderStateType {
   currentIndex: number;
@@ -15,7 +15,7 @@ const initialSliderState: SliderStateType = {
 };
 
 const sliderSlice = createSlice({
-  name: 'slider',
+  name: "slider",
   initialState: initialSliderState,
   reducers: {
     changeIndex(state, action) {
@@ -26,7 +26,7 @@ const sliderSlice = createSlice({
       state.transition = action.payload;
       state.scrollable = false;
     },
-    next(state) {
+    nextIndex(state) {
       state.currentIndex++;
       state.scrollable = false;
     },
@@ -40,15 +40,30 @@ const sliderSlice = createSlice({
       state.scrollable = false;
       state.autoScroll = false;
     },
-    scroll(state) {
+    enableScroll(state) {
       state.scrollable = true;
     },
-    auto(state) {
+    disableScroll(state) {
+      state.scrollable = false;
+    },
+    startAuto(state) {
       state.autoScroll = true;
+    },
+    stopAuto(state) {
+      state.autoScroll = false;
     },
   },
 });
 
-export const { changeIndex, changeTransition, next, nextBtn, prevBtn, scroll, auto } =
-  sliderSlice.actions;
+export const {
+  changeIndex,
+  changeTransition,
+  nextIndex,
+  nextBtn,
+  prevBtn,
+  enableScroll,
+  disableScroll,
+  startAuto,
+  stopAuto,
+} = sliderSlice.actions;
 export default sliderSlice.reducer;
