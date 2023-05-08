@@ -17,7 +17,7 @@ const IntroTop = styled.div`
   width: 100%;
   height: 100%;
 
-  @keyframes slideInDown-1 {
+  @keyframes slideInUpperToBottom-1 {
     0% {
       transform: translate3d(0, 0, 0);
     }
@@ -34,7 +34,7 @@ const IntroTop = styled.div`
       transform: translate3d(0, 0, 0);
     }
   }
-  @keyframes slideInDown-2 {
+  @keyframes slideInUpperToBottom-2 {
     0% {
       transform: translate3d(0, 0, 0);
     }
@@ -54,10 +54,10 @@ const IntroTop = styled.div`
 
   &.upper-1 {
     background-color: #527578;
-    animation: slideInDown-1 2.5s linear 0.7s 1 normal;
+    animation: slideInUpperToBottom-1 2.5s linear 0.7s 1 normal;
   }
   &.upper-2 {
     background-color: #d3d3d3;
-    animation: slideInDown-2 2.5s linear 1s 1 normal;
+    animation: slideInUpperToBottom-2 2.5s linear 1s 1 normal;
   }
 `;

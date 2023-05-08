@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import IntroTop from '@/components/Molecules/IntroTop';
-import IntroBottom from '@/components/Molecules/IntroBottom';
-import IntroLogo from '@/components/Molecules/IntroLogo';
+import Top from '../Molecules/Intro/Top';
+import Bottom from '../Molecules/Intro/Bottom';
+import Logo from '../Molecules/Intro/Logo';
 import { useState } from 'react';
 
 const Intro = () => {
+  //TODO: 의미 없는 숫자들 변수로 지정해서 가독성 높히기
   const [display, setdisplay] = useState<string>('');
   const [background, setbackground] = useState<string>('');
   setTimeout(() => {
@@ -16,9 +17,9 @@ const Intro = () => {
   return (
     <>
       <IntroContainer className={`${display} ${background}`}>
-        <IntroTop />
-        <IntroBottom />
-        <IntroLogo />
+        <Top />
+        <Bottom />
+        <Logo />
       </IntroContainer>
     </>
   );

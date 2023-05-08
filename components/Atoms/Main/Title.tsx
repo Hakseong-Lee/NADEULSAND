@@ -1,18 +1,16 @@
-import styled, { css } from 'styled-components';
-
-export default function title() {
-  return <Title>NADEUL SAND COOKIE</Title>;
-}
+import styled, { css } from "styled-components";
 
 const Title = styled.h1`
   position: absolute;
+  z-index: 900;
   width: 100vw;
-  margin-top: 1rem;
+
   text-align: center;
-  z-index: 10;
+  pointer-events: none;
   ${({ theme }) => {
     return css`
-      font-size: ${theme.font.size.title};
+      margin-top: ${theme.margins.lg};
+      font-size: clamp(1.8rem, 6vw, ${theme.font.size.title});
       font-weight: ${theme.font.weight.bold};
       color: ${theme.colors.white};
     `;
@@ -32,3 +30,5 @@ const Title = styled.h1`
   }
   animation: title-start 2s 1 linear 3s;
 `;
+
+export default Title;

@@ -4,11 +4,14 @@
   border: 0;
   box-sizing: border-box;
 }
+
 ol,
 ul {
   list-style-type: none;
 }
-
+li {
+  display: list-item;
+}
 a {
   cursor: pointer;
 }

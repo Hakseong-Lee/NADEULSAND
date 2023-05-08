@@ -1,14 +1,5 @@
 import styled, { css } from 'styled-components';
 
-const MainCircle = () => {
-  return (
-    <>
-      <Circle />
-    </>
-  );
-};
-export default MainCircle;
-
 const Circle = styled.div`
   position: absolute;
   top: 50%;
@@ -23,3 +14,4 @@ const Circle = styled.div`
     `;
   }};
 `;
+export default Circle;
