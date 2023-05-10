@@ -1,6 +1,6 @@
-import { colors } from "@/utils/variables";
-import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import { colors } from '@/utils/variables';
+import React, { useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 // TODO: have to change a color of wave according to a currentItem
 const Wave = () => {
@@ -28,9 +28,9 @@ const Wave = () => {
               x="50"
               y="7"
               style={{
-                animationDelay: "4s",
-                animationDuration: "7s",
-                opacity: "0.3",
+                animationDelay: '4s',
+                animationDuration: '7s',
+                opacity: '0.3',
               }}
               fill={color}
             />
@@ -39,9 +39,9 @@ const Wave = () => {
               x="50"
               y="7"
               style={{
-                animationDelay: "3s",
-                animationDuration: "10s",
-                opacity: "0.5",
+                animationDelay: '3s',
+                animationDuration: '10s',
+                opacity: '0.5',
               }}
               fill={color}
             />
@@ -50,9 +50,9 @@ const Wave = () => {
               x="50"
               y="7"
               style={{
-                animationDelay: "2s",
-                animationDuration: "13s",
-                opacity: "0.7",
+                animationDelay: '2s',
+                animationDuration: '13s',
+                opacity: '0.7',
               }}
               fill={color}
             />
@@ -60,7 +60,7 @@ const Wave = () => {
               xlinkHref="#gentle-wave"
               x="50"
               y="5"
-              style={{ animationDuration: "20s" }}
+              style={{ animationDuration: '20s' }}
               fill={color}
             />
           </g>

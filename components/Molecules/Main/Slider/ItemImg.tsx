@@ -1,21 +1,13 @@
-import styled from "styled-components";
-import Image from "next/image";
-import { useState } from "react";
-import { ListItemsType } from "../../../Atoms/ItemList";
-import { useDispatch, useSelector } from "react-redux";
-import { SliderStateType, changeIndex } from "../../../../store/slider";
+import styled from 'styled-components';
+import Image from 'next/image';
+import { useState } from 'react';
+import { ListItemsType } from '../../../Atoms/ItemList';
+import { useDispatch, useSelector } from 'react-redux';
+import { SliderStateType, changeIndex, disableScroll } from '../../../../store/slider';
 
-const MainItemImg = ({
-  item,
-  index,
-}: {
-  item: ListItemsType;
-  index: number;
-}) => {
+const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) => {
   const dispatch = useDispatch();
-  const currentIndex = useSelector(
-    (state: SliderStateType) => state.currentIndex
-  );
+  const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
 
   const itemList: number = 3;
   const transitionTime: number = 2;
@@ -39,16 +31,10 @@ const MainItemImg = ({
         className={`${item.name} ${item.index}`}
         style={{
           transform: `translateX(${(index - currentIndex) * 60}rem)`,
-          transition: transition
-            ? `transform ${transitionTime}s ease-in-out`
-            : "",
+          transition: transition ? `transform ${transitionTime}s ease-in-out` : '',
         }}
       >
-        <Image
-          src={item.src}
-          style={{ width: "100%", height: "100%" }}
-          alt={item.name}
-        ></Image>
+        <Image src={item.src} style={{ width: '100%', height: '100%' }} alt={item.name}></Image>
       </ImgWrap>
     </>
   );
