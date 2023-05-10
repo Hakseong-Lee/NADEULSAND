@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 
 // TODO: have to change a color of wave according to a currentItem
 const Wave = () => {
-  const [color, setColor] = useState<string>(colors.beige);
+  const [color, setColor] = useState<string>(colors.caramel);
 
   return (
     <>
@@ -14,7 +14,7 @@ const Wave = () => {
           xmlnsXlink="http://www.w3.org/1999/xlink"
           viewBox="0 25 120 28"
           preserveAspectRatio="none"
-          shape-rendering="auto"
+          shapeRendering="auto"
         >
           <defs>
             <path
