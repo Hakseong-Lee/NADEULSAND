@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useCallback, useRef } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   SliderStateType,
   nextBtn,
@@ -8,40 +9,52 @@ import {
   disableScroll,
   startAuto,
   stopAuto,
-} from "../../../../store/slider";
-import {
-  animationTime,
+} from '../../../../store/slider';
+
+const SliderNav = ({
+  transitionTime,
   sliderChangingTime,
-} from "../../../Organisms/MainSlider";
-
-const SliderNav = () => {
+}: {
+  transitionTime: number;
+  sliderChangingTime: number;
+}) => {
   const dispatch = useDispatch();
-  const isScrollable = useSelector(
-    (state: SliderStateType) => state.scrollable
-  );
+  const isScrollable = useSelector((state: SliderStateType) => state.scrollable);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (isScrollable) {
       dispatch(prevBtn());
       dispatch(disableScroll());
       dispatch(stopAuto());
-      setTimeout(() => {
+      handlePrevRef.current = setTimeout(() => {
         dispatch(enableScroll());
         dispatch(startAuto());
-      }, animationTime + sliderChangingTime);
+      }, transitionTime + sliderChangingTime);
     }
-  };
-  const handleNext = () => {
+  }, [isScrollable, dispatch]);
+
+  const handleNext = useCallback(() => {
     if (isScrollable) {
       dispatch(nextBtn());
       dispatch(disableScroll());
       dispatch(stopAuto());
-      setTimeout(() => {
+      handleNextRef.current = setTimeout(() => {
         dispatch(enableScroll());
         dispatch(startAuto());
-      }, animationTime + sliderChangingTime);
+      }, transitionTime + sliderChangingTime);
     }
-  };
+  }, [isScrollable, dispatch]);
+
+  const handlePrevRef = useRef<NodeJS.Timeout | undefined>();
+  const handleNextRef = useRef<NodeJS.Timeout | undefined>();
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(handlePrevRef.current);
+      clearTimeout(handleNextRef.current);
+    };
+  }, []);
+
   return (
     <>
       <Nav className="-prev" onClick={handlePrev}></Nav>
@@ -55,7 +68,6 @@ export default SliderNav;
 const Nav = styled.a`
   position: absolute;
   top: 0;
-
   height: 100%;
   width: 20vw;
   &.-prev {

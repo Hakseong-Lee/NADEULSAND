@@ -1,27 +1,46 @@
-import styled, { css, keyframes } from "styled-components";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { SliderStateType } from "../../../../store/slider";
-import { ListItemsType } from "../../../Atoms/ItemList";
+import styled, { css, keyframes } from 'styled-components';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { SliderStateType } from '../../../../store/slider';
+import { ListItemsType } from '../../../Atoms/ItemList';
 
-const MainItemName = ({ item }: { item: ListItemsType }) => {
-  const currentIndex = useSelector(
-    (state: SliderStateType) => state.currentIndex
-  );
-  const itemList: number = 3;
-  const transitionTime: number = 2000;
-  const [transition, setTransition] = useState<boolean>(true);
+const MainItemName = ({
+  item,
+  transitionTime,
+  maxDelay,
+}: {
+  item: ListItemsType;
+  transitionTime: number;
+  maxDelay: number;
+}) => {
+  const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
+  const delay: number = 1;
 
-  const replaceTransition = () => {
-    setTimeout(() => {
-      setTransition(false);
-    }, transitionTime + 1000);
+  const replaceSlide = () => {
+    setTransition(false);
     setTimeout(() => {
       setTransition(true);
-    }, transitionTime + 1020);
+    }, 100);
   };
-  if (currentIndex === itemList) replaceTransition();
-  if (currentIndex === -1) replaceTransition();
+
+  const [transition, setTransition] = useState<boolean>(true);
+  useEffect(() => {
+    switch (currentIndex) {
+      case 3: {
+        setTimeout(() => {
+          replaceSlide();
+        }, transitionTime + maxDelay);
+        break;
+      }
+      case -1: {
+        setTimeout(() => {
+          replaceSlide();
+        }, transitionTime + maxDelay);
+        break;
+      }
+    }
+  }, [currentIndex]);
+
   return (
     <>
       <NameContainer>
@@ -31,15 +50,13 @@ const MainItemName = ({ item }: { item: ListItemsType }) => {
               <ItemName
                 key={index}
                 style={{
-                  transform: `translateX(${
-                    (item.index - currentIndex) * 20
-                  }px)`,
+                  transform: `translateX(${(item.index - currentIndex) * 20}px)`,
                   opacity: item.index === currentIndex ? 1 : 0,
                   transition: transition
-                    ? `transform 1s linear ${
-                        index / 10 + 1
-                      }s, opacity 0.5s linear ${index / 10 + 1}s`
-                    : "",
+                    ? `transform 1s linear ${index / 10 + delay}s, opacity 0.5s linear ${
+                        index / 10 + delay
+                      }s`
+                    : '',
                 }}
               >
                 {name}

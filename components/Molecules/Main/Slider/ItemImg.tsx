@@ -1,29 +1,49 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ListItemsType } from '../../../Atoms/ItemList';
 import { useDispatch, useSelector } from 'react-redux';
-import { SliderStateType, changeIndex, disableScroll } from '../../../../store/slider';
+import { SliderStateType, changeIndex } from '../../../../store/slider';
 
-const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) => {
+const MainItemImg = ({
+  item,
+  index,
+  transitionTime,
+  maxDelay,
+}: {
+  item: ListItemsType;
+  index: number;
+  transitionTime: number;
+  maxDelay: number;
+}) => {
   const dispatch = useDispatch();
   const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
-
-  const itemList: number = 3;
-  const transitionTime: number = 2;
   const [transition, setTransition] = useState<boolean>(true);
+
   const replaceSlide = (index: number) => {
-    setTimeout(() => {
-      dispatch(changeIndex(index));
-      setTransition(false);
-    }, transitionTime * 1400 + 10);
+    setTransition(false);
+    dispatch(changeIndex(index));
     setTimeout(() => {
       setTransition(true);
-    }, transitionTime * 1400 + 50);
+    }, 100);
   };
 
-  if (currentIndex === itemList) replaceSlide(0);
-  if (currentIndex === -1) replaceSlide(2);
+  useEffect(() => {
+    switch (currentIndex) {
+      case 3: {
+        setTimeout(() => {
+          replaceSlide(0);
+        }, transitionTime + maxDelay);
+        break;
+      }
+      case -1: {
+        setTimeout(() => {
+          replaceSlide(2);
+        }, transitionTime + maxDelay);
+        break;
+      }
+    }
+  }, [currentIndex]);
 
   return (
     <>
@@ -31,7 +51,7 @@ const MainItemImg = ({ item, index }: { item: ListItemsType; index: number }) =>
         className={`${item.name} ${item.index}`}
         style={{
           transform: `translateX(${(index - currentIndex) * 60}rem)`,
-          transition: transition ? `transform ${transitionTime}s ease-in-out` : '',
+          transition: transition ? `transform ${transitionTime / 1000}s ease-in-out` : '',
         }}
       >
         <Image src={item.src} style={{ width: '100%', height: '100%' }} alt={item.name}></Image>
