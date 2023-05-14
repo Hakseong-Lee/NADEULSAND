@@ -6,8 +6,8 @@ export enum colors {
   beige = '#F3CFA5',
   babypink = '#FFABAB',
   pink = '#D14D72',
-  brown = '#AD8B73',
-  kakao = '#876445',
+  brown = '#865439',
+  kakao = '#361500',
 }
 export const bgOrder: { [key: string]: colors } = {
   '-2': colors.babypink,
