@@ -2,16 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInterval } from '../../../../hooks/customHooks';
-import {
-  SliderStateType,
-  nextBtn,
-  prevBtn,
-  enableScroll,
-  disableScroll,
-  startAuto,
-  stopAuto,
-  nextIndex,
-} from '../../../../store/slider';
+import { SliderStateType, prevBtn, nextIndex } from '../../../../store/slider';
 
 type sliderNavProps = {
   introTransitionTime: number;
@@ -37,9 +28,6 @@ const SliderNav: React.FC<sliderNavProps> = ({
   const currentIndex = useSelector((state: SliderStateType) => state.currentIndex);
   const [Scrollable, setScrollable] = useState<boolean>(false);
   const [Auto, setAuto] = useState<boolean>(true);
-  const isScrollable = useSelector((state: SliderStateType) => state.scrollable);
-  const isAuto = useSelector((state: SliderStateType) => state.autoScroll);
-
   const [time, setTime] = useState<number>(introTransitionTime);
 
   useEffect(() => {
@@ -50,41 +38,41 @@ const SliderNav: React.FC<sliderNavProps> = ({
   }, []);
 
   useInterval(() => {
-    if (isAuto) {
+    if (Auto) {
       dispatch(nextIndex());
-      dispatch(disableScroll());
+      setScrollable(false);
       changeBgColor(currentIndex);
       setTimeout(() => {
-        dispatch(enableScroll());
+        setScrollable(true);
       }, imgTransitionTime + scrollableTime);
     }
   }, time);
 
   const handlePrev = useCallback(() => {
-    if (isScrollable) {
+    if (Scrollable) {
       dispatch(prevBtn());
       changeBgColorLeft(currentIndex);
-      dispatch(disableScroll());
-      dispatch(stopAuto());
+      setScrollable(false);
+      setAuto(false);
       handlePrevRef.current = setTimeout(() => {
-        dispatch(enableScroll());
-        dispatch(startAuto());
+        setScrollable(true);
+        setAuto(true);
       }, imgTransitionTime + sliderChangingTime);
     }
-  }, [isScrollable, dispatch]);
+  }, [Scrollable]);
 
   const handleNext = useCallback(() => {
-    if (isScrollable) {
-      dispatch(nextBtn());
+    if (Scrollable) {
+      dispatch(nextIndex());
       changeBgColor(currentIndex);
-      dispatch(disableScroll());
-      dispatch(stopAuto());
+      setScrollable(false);
+      setAuto(false);
       handleNextRef.current = setTimeout(() => {
-        dispatch(enableScroll());
-        dispatch(startAuto());
+        setScrollable(true);
+        setAuto(true);
       }, imgTransitionTime + sliderChangingTime);
     }
-  }, [isScrollable, dispatch]);
+  }, [Scrollable]);
 
   const handlePrevRef = useRef<NodeJS.Timeout | undefined>();
   const handleNextRef = useRef<NodeJS.Timeout | undefined>();
