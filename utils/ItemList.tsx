@@ -1,6 +1,6 @@
-import mainCaramel from '../../public/assets/img/mainCaramel.webp';
-import mainStrawberry from '../../public/assets/img/mainStrawberry.webp';
-import mainKakao from '../../public/assets/img/mainKakao.webp';
+import mainCaramel from '../public/assets/img/mainCaramel.webp';
+import mainStrawberry from '../public/assets/img/mainStrawberry.webp';
+import mainKakao from '../public/assets/img/mainKakao.webp';
 
 export interface ListItemsType {
   name: string;

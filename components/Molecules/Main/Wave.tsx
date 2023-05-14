@@ -3,88 +3,89 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // TODO: have to change a color of wave according to a currentItem
-const Wave = () => {
-  const [color, setColor] = useState<string>(colors.caramel);
-
+type WaveProps = {
+  wavecolor: string;
+  nextwavecolor: string;
+};
+const Wave: React.FC<WaveProps> = ({ wavecolor, nextwavecolor }) => {
   return (
-    <>
-      <Header>
-        <WavesSvg
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          viewBox="0 25 120 28"
-          preserveAspectRatio="none"
-          shapeRendering="auto"
-        >
-          <defs>
-            <path
-              id="gentle-wave"
-              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-            />
-          </defs>
-          <g className="parallax">
-            <Waves
-              xlinkHref="#gentle-wave"
-              x="50"
-              y="7"
-              style={{
-                animationDelay: '4s',
-                animationDuration: '7s',
-                opacity: '0.3',
-              }}
-              fill={color}
-            />
-            <Waves
-              xlinkHref="#gentle-wave"
-              x="50"
-              y="7"
-              style={{
-                animationDelay: '3s',
-                animationDuration: '10s',
-                opacity: '0.5',
-              }}
-              fill={color}
-            />
-            <Waves
-              xlinkHref="#gentle-wave"
-              x="50"
-              y="7"
-              style={{
-                animationDelay: '2s',
-                animationDuration: '13s',
-                opacity: '0.7',
-              }}
-              fill={color}
-            />
-            <Waves
-              xlinkHref="#gentle-wave"
-              x="50"
-              y="5"
-              style={{ animationDuration: '20s' }}
-              fill={color}
-            />
-          </g>
-        </WavesSvg>
-      </Header>
-    </>
+    <WaveContainer>
+      <WavesSvg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        viewBox="0 25 120 30"
+        preserveAspectRatio="none"
+        shapeRendering="auto"
+      >
+        <defs>
+          <path
+            id="gentle-wave"
+            d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+          />
+        </defs>
+        <g className="parallax">
+          <Waves
+            xlinkHref="#gentle-wave"
+            x="50"
+            y="8"
+            style={{
+              animationDelay: '4s',
+              animationDuration: '7s',
+              opacity: '0.3',
+            }}
+            fill={wavecolor}
+          />
+          <Waves
+            xlinkHref="#gentle-wave"
+            x="50"
+            y="7"
+            style={{
+              animationDelay: '3s',
+              animationDuration: '10s',
+              opacity: '0.5',
+            }}
+            fill={wavecolor}
+          />
+          <Waves
+            xlinkHref="#gentle-wave"
+            x="50"
+            y="7"
+            style={{
+              animationDelay: '2s',
+              animationDuration: '13s',
+              opacity: '0.7',
+            }}
+            fill={wavecolor}
+          />
+          <Waves
+            xlinkHref="#gentle-wave"
+            x="50"
+            y="5"
+            style={{ animationDuration: '20s' }}
+            fill={wavecolor}
+          />
+        </g>
+      </WavesSvg>
+    </WaveContainer>
   );
 };
 
 export default Wave;
 
-const Header = styled.div`
+const WaveContainer = styled.div`
+  height: 100%;
+  display: block;
   position: relative;
-  height: 100vh;
+  box-sizing: border-box;
 `;
 
 const WavesSvg = styled.svg`
   position: absolute;
   width: 100%;
   height: 100%;
-  bottom: 17px;
-  margin-bottom: -7px; /* Fix for safari gap */
-  min-height: 5rem;
-  max-height: 15rem;
+  bottom: 0;
+  min-height: 5vh;
+  max-height: 25vh;
 `;
 
 const moveForeverAnimation = keyframes`

@@ -2,7 +2,7 @@ import styled, { css, keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { SliderStateType } from '../../../../store/slider';
-import { ListItemsType } from '../../../Atoms/ItemList';
+import { ListItemsType } from '../../../../utils/ItemList';
 
 const MainItemName = ({
   item,

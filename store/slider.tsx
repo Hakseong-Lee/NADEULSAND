@@ -5,11 +5,6 @@ export interface SliderStateType {
   scrollable: boolean;
   autoScroll: boolean;
   transition: boolean;
-  bgPostion: string;
-  bgColor: string;
-  nextBgColor: string;
-  waveColor: string;
-  nextWaveColor: string;
 }
 
 const initialSliderState: SliderStateType = {
@@ -17,11 +12,6 @@ const initialSliderState: SliderStateType = {
   scrollable: false,
   autoScroll: true,
   transition: true,
-  bgPostion: 'left top',
-  bgColor: '#F3CFA5',
-  nextBgColor: '#FFABAB',
-  waveColor: '#B46B18',
-  nextWaveColor: '#D14D72',
 };
 
 const sliderSlice = createSlice({
@@ -33,9 +23,6 @@ const sliderSlice = createSlice({
     },
     changeTransition(state, action) {
       state.transition = action.payload;
-    },
-    changeBgPostion(state, action) {
-      state.bgPostion = action.payload;
     },
     nextIndex(state) {
       state.currentIndex++;

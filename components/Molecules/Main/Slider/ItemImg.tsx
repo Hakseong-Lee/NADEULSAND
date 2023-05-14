@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { ListItemsType } from '../../../Atoms/ItemList';
+import { ListItemsType } from '../../../../utils/ItemList';
 import { useDispatch, useSelector } from 'react-redux';
 import { SliderStateType, changeIndex } from '../../../../store/slider';
 
