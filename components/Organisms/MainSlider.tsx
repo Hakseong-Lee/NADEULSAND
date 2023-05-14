@@ -8,7 +8,7 @@ import ItemImg from '../Molecules/Main/Slider/ItemImg';
 import ItemName from '../Molecules/Main/Slider/ItemName';
 import SliderNav from '../Molecules/Main/Slider/SliderNav';
 import Wave from '../Molecules/Main/Wave';
-import { bgOrder } from '../../utils/variables';
+import { bgOrder, waveOrder } from '../../utils/variables';
 
 type TimeSettings = {
   introTransitionTime: number;
@@ -22,16 +22,13 @@ type TimeSettings = {
 };
 
 type ContainerProps = {
-  bgposition: string;
+  position: string;
   bgcolor: string;
   nextbgcolor: string;
   transition: string;
 };
 
 const MainSlide = () => {
-  const waveColor = useSelector((state: SliderStateType) => state.waveColor);
-  const nextWaveColor = useSelector((state: SliderStateType) => state.nextWaveColor);
-
   const timeSettings: TimeSettings = {
     introTransitionTime: 6000,
     sliderTransitionTime: 5000,
@@ -43,19 +40,21 @@ const MainSlide = () => {
     maxDelay: 700,
   };
 
-  const [bgColor, setBgColor] = useState<string>('#F3CFA5');
-  const [nextBgColor, setNextBgColor] = useState<string>('#FFABAB');
-  const [bgPosition, setBgPosition] = useState<string>('top center');
+  const [bgColor, setBgColor] = useState<string>(bgOrder[0]);
+  const [nextBgColor, setNextBgColor] = useState<string>(bgOrder[1]);
+  const [waveColor, setWaveColor] = useState<string>(waveOrder[0]);
+  const [position, setPosition] = useState<string>('top center');
   const [transition, setTransition] = useState<string>('background-position 1.5s linear;');
 
   // TODO: 배경
   const changeBgColor = (index: number) => {
     setTransition('');
     setNextBgColor(bgOrder[String(index + 1)]);
-    setBgPosition('left center');
+    setPosition('left center');
     setTimeout(() => {
       setTransition(`background-position ${timeSettings.bgTransitionTime / 1000}s linear;`);
-      setBgPosition('center center');
+      setPosition('center center');
+      setWaveColor(waveOrder[String(index + 1)]);
     }, timeSettings.delay);
     setTimeout(() => {
       setTransition('');
@@ -65,10 +64,11 @@ const MainSlide = () => {
   const changeBgColorLeft = (index: number) => {
     setTransition('');
     setNextBgColor(bgOrder[String(index - 1)]);
-    setBgPosition('right center');
+    setPosition('right center');
     setTimeout(() => {
       setTransition(`background-position ${timeSettings.bgTransitionTime / 1000}s linear;`);
-      setBgPosition('center center');
+      setPosition('center center');
+      setWaveColor(waveOrder[String(index - 1)]);
     }, timeSettings.delay);
     setTimeout(() => {
       setTransition('');
@@ -79,12 +79,12 @@ const MainSlide = () => {
   return (
     <>
       <Slide
-        bgposition={bgPosition}
+        position={position}
         bgcolor={bgColor}
         nextbgcolor={nextBgColor}
         transition={transition}
       >
-        <Wave wavecolor={waveColor} nextwavecolor={nextWaveColor} />
+        <Wave wavecolor={waveColor} />
         <SlideList>
           {listItems.map((item: ListItemsType, index: number) => (
             <SlideItem key={index}>
@@ -126,7 +126,7 @@ const Slide = styled.div<ContainerProps>`
     ${(props) => props.bgcolor} 50%
   );
   background-size: 700% 700%;
-  background-position: ${(props) => props.bgposition};
+  background-position: ${(props) => props.position};
   transition: ${(props) => props.transition};
 `;
 const SlideList = styled.ul`

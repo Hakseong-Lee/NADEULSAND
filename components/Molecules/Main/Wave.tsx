@@ -1,13 +1,11 @@
-import { colors } from '@/utils/variables';
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // TODO: have to change a color of wave according to a currentItem
 type WaveProps = {
   wavecolor: string;
-  nextwavecolor: string;
 };
-const Wave: React.FC<WaveProps> = ({ wavecolor, nextwavecolor }) => {
+const Wave: React.FC<WaveProps> = ({ wavecolor }) => {
   return (
     <WaveContainer>
       <WavesSvg
@@ -98,5 +96,6 @@ const moveForeverAnimation = keyframes`
 `;
 
 const Waves = styled.use`
+  transition: fill 0.5s ease-in-out;
   animation: ${moveForeverAnimation} cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 `;

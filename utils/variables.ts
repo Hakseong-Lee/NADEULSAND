@@ -18,3 +18,12 @@ export const bgOrder: { [key: string]: colors } = {
   '3': colors.beige,
   '4': colors.babypink,
 };
+export const waveOrder: { [key: string]: colors } = {
+  '-2': colors.pink,
+  '-1': colors.kakao,
+  '0': colors.caramel,
+  '1': colors.pink,
+  '2': colors.kakao,
+  '3': colors.caramel,
+  '4': colors.pink,
+};
