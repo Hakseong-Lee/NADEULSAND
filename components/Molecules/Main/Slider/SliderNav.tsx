@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInterval } from '../../../../hooks/customHooks';
 import { SliderStateType, prevBtn, nextIndex } from '../../../../store/slider';
+import NavLogo from '@/components/Atoms/Main/NavLogo';
 
 type sliderNavProps = {
   introTransitionTime: number;
@@ -29,6 +30,25 @@ const SliderNav: React.FC<sliderNavProps> = ({
   const [Scrollable, setScrollable] = useState<boolean>(false);
   const [Auto, setAuto] = useState<boolean>(true);
   const [time, setTime] = useState<number>(introTransitionTime);
+
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [side, setSide] = useState('');
+
+  const handleMouseMove = (event: React.MouseEvent) => {
+    setPosition({ x: event.clientX, y: event.clientY });
+  };
+  const handleMouseEnterLeft = () => {
+    setIsHovered(true);
+    setSide('left');
+  };
+  const handleMouseEnterRight = () => {
+    setIsHovered(true);
+    setSide('right');
+  };
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   useEffect(() => {
     const TransitionTimer = setTimeout(() => {
@@ -86,13 +106,37 @@ const SliderNav: React.FC<sliderNavProps> = ({
 
   return (
     <>
-      <Nav className="-prev" onClick={handlePrev}></Nav>
-      <Nav className="-next" onClick={handleNext}></Nav>
+      <Nav
+        className="-prev"
+        onClick={handlePrev}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnterLeft}
+        onMouseLeave={handleMouseLeave}
+      >
+        <NavLogoContainer isVisible={isHovered} style={{ top: position.y, left: position.x }}>
+          <NavLogo arrow={side} />
+        </NavLogoContainer>
+      </Nav>
+
+      <Nav
+        className="-next"
+        onClick={handleNext}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnterRight}
+        onMouseLeave={handleMouseLeave}
+      ></Nav>
     </>
   );
 };
 
 export default SliderNav;
+
+const NavLogoContainer = styled.div<{ isVisible: boolean }>`
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+`;
 
 const Nav = styled.a`
   position: absolute;
