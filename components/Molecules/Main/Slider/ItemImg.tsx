@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { ListItemsType } from '../../../../utils/ItemList';
@@ -62,6 +62,50 @@ const MainItemImg = ({
 
 export default MainItemImg;
 
+const currentImgStart = keyframes`
+    0% {
+      transform: translate3d(300rem, 0, 0);
+    }
+    40% {
+      transform: translate3d(200rem, 0, 0);
+    }
+    80% {
+      transform: translate3d(120rem, 0, 0);
+    }
+    100% {
+      transform: translate3d(120rem, 0, 0);
+    }
+`;
+
+const prevImgStart = keyframes`
+    0% {
+      transform: translate3d(300rem, 0, 0);
+    }
+    40% {
+      transform: translate3d(200rem, 0, 0);
+    }
+    80% {
+      transform: translate3d(40rem, 0, 0);
+    }
+    100% {
+      transform: translate3d(60rem, 0, 0);
+    }
+`;
+
+const nextImgStart = keyframes`
+    0% {
+      transform: translate3d(40rem, 0, 0);
+    }
+    40% {
+      transform: translate3d(40rem, 0, 0);
+    }
+    80% {
+      transform: translate3d(200rem, 0, 0);
+    }
+    100% {
+      transform: translate3d(180rem, 0, 0);
+    }
+`;
 const ImgWrap = styled.span`
   position: absolute;
   top: 50%;
@@ -72,20 +116,11 @@ const ImgWrap = styled.span`
   height: 30rem;
   margin-top: -16rem;
   margin-left: -135rem;
-
-  @keyframes img-start {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    40% {
-      transform: translate3d(500%, 0, 0);
-    }
-    80% {
-      transform: translate3d(200%, 0, 0);
-    }
-    100% {
-      transform: translate3d(350%, 0, 0);
-    }
+  &.strawberry {
+    animation: ${nextImgStart} 4.5s 1 ease-in-out 1.4s;
   }
-  animation: img-start 4.5s 1 ease-in-out 1.4s;
+  &.kakao {
+    animation: ${prevImgStart} 4.5s 1 ease-in-out 1.4s;
+  }
+  animation: ${currentImgStart} 4.5s 1 ease-in-out 1.4s;
 `;
