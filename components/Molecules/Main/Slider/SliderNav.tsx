@@ -5,7 +5,7 @@ import { useInterval } from '../../../../hooks/customHooks';
 import { SliderStateType, prevBtn, nextIndex } from '../../../../store/slider';
 import NavLogo from '@/components/Atoms/Main/NavLogo';
 
-type sliderNavProps = {
+type SliderNavProps = {
   introTransitionTime: number;
   sliderTransitionTime: number;
   imgTransitionTime: number;
@@ -16,7 +16,7 @@ type sliderNavProps = {
   changeBgColorLeft: (index: number) => void;
 };
 
-const SliderNav: React.FC<sliderNavProps> = ({
+const SliderNav: React.FC<SliderNavProps> = ({
   introTransitionTime,
   sliderTransitionTime,
   imgTransitionTime,
@@ -31,31 +31,32 @@ const SliderNav: React.FC<sliderNavProps> = ({
   const [Auto, setAuto] = useState<boolean>(true);
   const [time, setTime] = useState<number>(introTransitionTime);
 
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [side, setSide] = useState('');
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState<string>('none');
+  const [side, setSide] = useState<string>('');
 
-  const handleMouseMove = (event: React.MouseEvent) => {
+  const handleMouseMove = useCallback((event: React.MouseEvent) => {
     setPosition({ x: event.clientX, y: event.clientY });
-  };
-  const handleMouseEnterLeft = () => {
-    setIsHovered(true);
-    setSide('left');
-  };
-  const handleMouseEnterRight = () => {
-    setIsHovered(true);
-    setSide('right');
-  };
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  }, []);
+
+  const handleMouseEnter = useCallback(
+    (side: string) => () => {
+      setIsHovered('block');
+      setSide(side);
+    },
+    []
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered('none');
+  }, []);
 
   useEffect(() => {
-    const TransitionTimer = setTimeout(() => {
+    const transitionTimer = setTimeout(() => {
       setTime(sliderTransitionTime);
     }, 3000);
-    return () => clearTimeout(TransitionTimer);
-  }, []);
+    return () => clearTimeout(transitionTimer);
+  }, [sliderTransitionTime]);
 
   useInterval(() => {
     if (Auto) {
@@ -68,61 +69,48 @@ const SliderNav: React.FC<sliderNavProps> = ({
     }
   }, time);
 
-  const handlePrev = useCallback(() => {
-    if (Scrollable) {
-      dispatch(prevBtn());
-      changeBgColorLeft(currentIndex);
-      setScrollable(false);
-      setAuto(false);
-      handlePrevRef.current = setTimeout(() => {
-        setScrollable(true);
-        setAuto(true);
-      }, imgTransitionTime + sliderChangingTime);
-    }
-  }, [Scrollable]);
-
-  const handleNext = useCallback(() => {
-    if (Scrollable) {
-      dispatch(nextIndex());
-      changeBgColor(currentIndex);
-      setScrollable(false);
-      setAuto(false);
-      handleNextRef.current = setTimeout(() => {
-        setScrollable(true);
-        setAuto(true);
-      }, imgTransitionTime + sliderChangingTime);
-    }
-  }, [Scrollable]);
-
-  const handlePrevRef = useRef<NodeJS.Timeout | undefined>();
-  const handleNextRef = useRef<NodeJS.Timeout | undefined>();
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(handlePrevRef.current);
-      clearTimeout(handleNextRef.current);
-    };
-  }, []);
+  const changeIndex = useCallback(
+    (action: Function, changeBgColorFunc: Function) => () => {
+      if (Scrollable) {
+        dispatch(action());
+        changeBgColorFunc(currentIndex);
+        setScrollable(false);
+        setAuto(false);
+        setTimeout(() => {
+          setScrollable(true);
+          setAuto(true);
+        }, imgTransitionTime + sliderChangingTime);
+      }
+    },
+    [
+      Scrollable,
+      currentIndex,
+      imgTransitionTime,
+      sliderChangingTime,
+      changeBgColor,
+      changeBgColorLeft,
+    ]
+  );
 
   return (
     <>
       <Nav
         className="-prev"
-        onClick={handlePrev}
+        onClick={changeIndex(prevBtn, changeBgColorLeft)}
         onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnterLeft}
+        onMouseEnter={handleMouseEnter('left')}
         onMouseLeave={handleMouseLeave}
       >
-        <NavLogoContainer isVisible={isHovered} style={{ top: position.y, left: position.x }}>
+        <NavLogoContainer show={isHovered} style={{ top: position.y, left: position.x }}>
           <NavLogo arrow={side} />
         </NavLogoContainer>
       </Nav>
 
       <Nav
         className="-next"
-        onClick={handleNext}
+        onClick={changeIndex(nextIndex, changeBgColor)}
         onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnterRight}
+        onMouseEnter={handleMouseEnter('right')}
         onMouseLeave={handleMouseLeave}
       ></Nav>
     </>
@@ -131,11 +119,11 @@ const SliderNav: React.FC<sliderNavProps> = ({
 
 export default SliderNav;
 
-const NavLogoContainer = styled.div<{ isVisible: boolean }>`
+const NavLogoContainer = styled.div<{ show: string }>`
   position: absolute;
   width: 5rem;
   height: 5rem;
-  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+  display: ${(props) => props.show};
 `;
 
 const Nav = styled.a`
