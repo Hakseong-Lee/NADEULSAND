@@ -1,7 +1,8 @@
 import { colors } from '@/utils/variables';
 import styled, { keyframes } from 'styled-components';
 
-const color = colors.navy;
+const navy = colors.navy;
+const lightNavy = colors.lightNavy;
 
 type NavLogoProps = {
   arrow: string;
@@ -23,15 +24,22 @@ export default NavLogo;
 const fadeIn = keyframes`
   0% {
     opacity: 0;
-    transform: scale(0) rotate(-360deg);
+    transform: scale(0) rotate(0deg);
+  }
+  25% {
+    opacity: 0.5;
+    transform: scale(0.5) rotate(90deg);
   }
   50% {
-    opacity: 0.5;
-    transform: scale(0.5) rotate(-90deg);
+    opacity: 0.7;
+    transform: scale(0.8) rotate(180deg);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1) rotate(240deg);
   }
   100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(360deg);
   }
 `;
 
@@ -47,14 +55,16 @@ const Circle = styled.div`
   margin-left: -0.24rem;
   margin-top: -0.4rem;
   border-radius: 50%;
-  background-color: ${color};
+  opacity: 0.5;
+  background-color: ${lightNavy};
 `;
 
 const Line = styled.div`
   position: absolute;
   width: 0.3rem;
   height: 2rem;
-  background-color: ${color};
+  opacity: 0.5;
+  background-color: ${lightNavy};
   transform: translateY(-50%);
   &.left {
     margin-left: -2rem;
@@ -76,8 +86,8 @@ const Arrow = styled.div`
   position: absolute;
   width: 2rem;
   height: 2rem;
-  border-top: 0.3rem solid ${color};
-  border-right: 0.3rem solid ${color};
+  border-top: 0.3rem solid ${navy};
+  border-right: 0.3rem solid ${navy};
   border-radius: 3px;
   &.left {
     margin-left: -2.8rem;
