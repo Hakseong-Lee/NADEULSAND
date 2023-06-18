@@ -1,14 +1,13 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { listItems } from '../../utils/ItemList';
-import { useDispatch, useSelector } from 'react-redux';
-import { SliderStateType } from '../../store/slider';
 import { ListItemsType } from '../../utils/ItemList';
 import ItemImg from '../Molecules/Main/Slider/ItemImg';
 import ItemName from '../Molecules/Main/Slider/ItemName';
 import SliderNav from '../Molecules/Main/Slider/SliderNav';
 import Wave from '../Molecules/Main/Wave';
 import { bgOrder, waveOrder } from '../../utils/variables';
+import ScrollArrow from '../Atoms/Main/ScrollArrow';
 
 type TimeSettings = {
   introTransitionTime: number;
@@ -108,6 +107,7 @@ const MainSlide = () => {
           changeBgColorLeft={changeBgColorLeft}
         />
       </Slide>
+      <ScrollArrow />
     </>
   );
 };

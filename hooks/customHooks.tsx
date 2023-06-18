@@ -1,36 +1,38 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 
-export const useInterval = (callback: () => void, delay: number) => {
-  const savedCallback = useRef<any>();
+export const useInterval = (callback: () => void, delay: number | null) => {
+  const savedCallback = useRef<() => void>();
+
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
+
   useEffect(() => {
     const tick = () => {
-      savedCallback.current();
+      savedCallback.current!();
     };
     if (delay !== null) {
-      let id = setInterval(tick, delay);
+      const id = setInterval(tick, delay);
       return () => clearInterval(id);
     }
   }, [delay]);
 };
 
 export const useThrottle = (callback: () => void, delay: number) => {
-  let timer = useRef<boolean>(false);
-  return function () {
-    console.log('click');
-    if (timer.current) return;
-    if (!timer.current) {
-      console.log('change');
+  const timeoutIdRef = useRef<NodeJS.Timeout | undefined>();
+  const throttledFunction = useCallback(() => {
+    if (!timeoutIdRef.current) {
       callback();
-      timer.current = true;
-      setTimeout(() => {
-        timer.current = false;
+      timeoutIdRef.current = setTimeout(() => {
+        clearTimeout(timeoutIdRef.current!);
+        timeoutIdRef.current = undefined;
       }, delay);
     }
-  };
+  }, [callback, delay]);
+
+  return throttledFunction;
 };
+
 export const useDebounce = (callback: () => void, delay: number) => {
   let timer: any;
   return function () {
