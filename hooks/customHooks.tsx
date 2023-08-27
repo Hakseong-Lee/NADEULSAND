@@ -33,6 +33,27 @@ export const useThrottle = (callback: () => void, delay: number) => {
   return throttledFunction;
 };
 
+export const useThrottleObserver = (
+  callback: (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void,
+  delay: number
+) => {
+  const timeoutIdRef = useRef<NodeJS.Timeout | undefined>();
+  const throttledFunction = useCallback(
+    (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      if (!timeoutIdRef.current) {
+        callback(entries, observer);
+        timeoutIdRef.current = setTimeout(() => {
+          clearTimeout(timeoutIdRef.current!);
+          timeoutIdRef.current = undefined;
+        }, delay);
+      }
+    },
+    [callback, delay]
+  );
+
+  return throttledFunction;
+};
+
 export const useDebounce = (callback: () => void, delay: number) => {
   let timer: any;
   return function () {

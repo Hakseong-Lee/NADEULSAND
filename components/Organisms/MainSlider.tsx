@@ -45,7 +45,6 @@ const MainSlide = () => {
   const [position, setPosition] = useState<string>('top center');
   const [transition, setTransition] = useState<string>('background-position 1.5s linear;');
 
-  // TODO: 배경
   const changeBgColor = (index: number) => {
     setTransition('');
     setNextBgColor(bgOrder[String(index + 1)]);
@@ -106,8 +105,8 @@ const MainSlide = () => {
           changeBgColor={changeBgColor}
           changeBgColorLeft={changeBgColorLeft}
         />
+        <ScrollArrow />
       </Slide>
-      <ScrollArrow />
     </>
   );
 };

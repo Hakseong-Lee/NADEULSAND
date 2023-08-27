@@ -1,6 +1,7 @@
 import Intro from '@/components/Organisms/Intro';
 import Title from './Atoms/Main/Title';
-import MainContainer from './Templates/MainContainer';
+import SlideContainer from './Templates/SlideContainer';
+import BrandContainer from './Templates/BrandContainer';
 const Layout = () => {
   return (
     <>
@@ -9,7 +10,8 @@ const Layout = () => {
         <Title>NADEUL SAND COOKIE</Title>
       </header>
       <main>
-        <MainContainer />
+        <SlideContainer />
+        <BrandContainer />
       </main>
     </>
   );
